@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 
+import { LoginService } from './../login.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,8 +15,12 @@ export class LoginComponent implements OnInit {
   public isLogin = false;
   public errUserNameValidate = false;
   public errPasswordValidate = false;
+  public hasErrorAfterRequest = false;
 
-  constructor( private fb: FormBuilder ) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService) { }
+
   loginForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
@@ -28,10 +34,22 @@ export class LoginComponent implements OnInit {
       this.isLogin = true;
       const user = this.loginForm.value;
       console.log(user);
+      this.loginService.sẹndRequestToGetToken(user).subscribe(
+        data => {
+          console.log(data);
+          this.isLogin = true;
+        },
+        error => {
+          this.loginService.handleError(error);
+          this.isLogin = false;
+          this.hasErrorAfterRequest = true;
+        }
+      );
     }
   }
   resetErr() {
     this.errUserNameValidate = false;
     this.errPasswordValidate = false;
+    this.hasErrorAfterRequest = false;
   }
 }

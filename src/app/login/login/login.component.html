@@ -19,7 +19,7 @@
                     formControlName="password" required
                     (focus)="resetErr()" 
                   >
-                  <small *ngIf="errPasswordValidate"class="text-danger">Nhập pass vào</small>
+                  <small *ngIf="errPasswordValidate" class="text-danger">Nhập pass vào</small>
               </div>
               <div class="custom-control custom-checkbox my-3">
                   <input type="checkbox" class="custom-control-input" id="cate1">
@@ -37,6 +37,11 @@
                     <span>Login</span>
                 </ng-template>
               </button>
+              <div class="alert alert-danger" role="alert"
+                *ngIf="hasErrorAfterRequest"
+              >
+                <strong>Oh snap!</strong>This acc don't exist. Please try to login again!
+              </div>
           </form>
       </div>
   </div>
