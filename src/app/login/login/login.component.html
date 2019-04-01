@@ -1,0 +1,43 @@
+<div class="col-md-4 offset-md-4 my-5 py-5">
+  <div class="card">
+      <div class="card-header text-center">
+          <h4>LOGIN FORM</h4>
+      </div>
+      <div class="card-body">
+          <form [formGroup]="loginForm" (submit)="onLogin()">
+              <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" name="username"
+                    formControlName="username" required
+                    (focus)="resetErr()"
+                  >
+                  <small *ngIf="errUserNameValidate"class="text-danger">Nhập name vào</small>
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" name="password"
+                    formControlName="password" required
+                    (focus)="resetErr()" 
+                  >
+                  <small *ngIf="errPasswordValidate"class="text-danger">Nhập pass vào</small>
+              </div>
+              <div class="custom-control custom-checkbox my-3">
+                  <input type="checkbox" class="custom-control-input" id="cate1">
+                  <label class="custom-control-label" for="cate1">Remember me</label>
+              </div>
+              <button type="submit" class="btn btn-success btn-block"
+                [disabled]="isLogin"
+              >
+                <ng-container *ngIf="isLogin; else caseLogin">
+                    <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </ng-container>
+                <ng-template #caseLogin>
+                    <span>Login</span>
+                </ng-template>
+              </button>
+          </form>
+      </div>
+  </div>
+</div>
