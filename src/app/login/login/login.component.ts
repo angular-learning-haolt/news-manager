@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   });
   ngOnInit() { }
   onLogin() {
+    console.log(this.loginForm.value);
     if (this.loginForm.invalid) {
       this.errUserNameValidate = (this.loginForm.value.username === '') ? true : false;
       this.errPasswordValidate = (this.loginForm.value.password === '') ? true : false;

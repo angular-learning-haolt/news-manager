@@ -6,7 +6,7 @@ import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-
+  
   public apiUrl = 'https://demo.crefox.com/news-sun-training/';
   public errStatus: string;
 
