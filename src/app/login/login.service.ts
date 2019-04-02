@@ -11,12 +11,12 @@ export class LoginService {
   public errStatus: string;
 
   constructor(
-    private http: HttpClient
+       private http: HttpClient
   ) { }
 
   sẹndRequestToGetToken(user): Observable<any> {
     return this.http.post(
-      this.buildUrl('wp-json/jwt-auth/v1/token'),
+         this.buildUrl('wp-json/jwt-auth/v1/token'),
       {
         username: user.username, // 'le.thi.hao', // ,  le.thi.hao
         password: user.password   // user.password  'Aa@123456'

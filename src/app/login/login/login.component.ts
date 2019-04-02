@@ -4,6 +4,8 @@ import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 
 import { LoginService } from './../login.service';
+import { CookieService } from './../../shared/cookie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private cookieService: CookieService,
+    private router: Router
+    ) { }
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -33,11 +38,12 @@ export class LoginComponent implements OnInit {
     } else {
       this.isLogin = true;
       const user = this.loginForm.value;
-      console.log(user);
       this.loginService.sẹndRequestToGetToken(user).subscribe(
         data => {
           console.log(data);
           this.isLogin = true;
+          this.cookieService.setCookie('token', data.token, 3);
+          this.router.navigate(['news']);
         },
         error => {
           this.loginService.handleError(error);

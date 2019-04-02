@@ -1,0 +1,29 @@
+<header>
+  <nav class="navbar navbar-expand-lg" id="f-navbar">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item" 
+                  routerLinkActive="active"
+                  *ngFor="let nav of navs"
+              >
+                  <a class="nav-link" 
+                      [routerLink]="nav.route"
+                  >
+                      {{ nav.title | titlecase }}
+                  </a>
+              </li>
+          </ul>
+          <div class="authen">
+               <button class="btn btn-dark authen__logout"
+               (click)="onLogOut()"
+               *ngIf="true"
+              >
+                  Log Out
+              </button>
+          </div>
+      </div>
+  </nav>
+</header>

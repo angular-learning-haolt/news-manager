@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { LoginGuard } from './login/login.guard';
+import { ContinueLoginGuard } from './login/continue.login.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -11,11 +14,22 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    loadChildren: './login/login.module#LoginModule',
+    canActivate: [
+      ContinueLoginGuard
+    ]
+    // canActivate: [
+    //   !LoginGuard
+    // ]
+    // Expect: Nếu Login rồi (lưu token rồi)
+    // thì ko cho vào route này nữa :V thay vì tạo 1 Guard khác thì có cách nào ko nhỉ?)
   },
   {
     path: 'news',
-    loadChildren: './news/news.module#NewsModule'
+    loadChildren: './news/news.module#NewsModule',
+    canActivate: [
+      LoginGuard
+    ]
   },
   {
     path: '**',
