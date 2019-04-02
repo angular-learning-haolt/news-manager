@@ -1,3 +1,23 @@
-<p>
-  news-list works!
-</p>
+<div class="row my-5">
+  <div class="col-md-4 my-3"
+    *ngFor="let item of news"
+  >
+    <div class="card text-center">
+      <div class="card-header">
+        {{ item?.format }}
+      </div>
+      <div class="card-body">
+        <h3 class="card-title text-center">
+          {{ item?.title.rendered }}
+        </h3>
+        <p class="text-right"><i>{{ item?.date }}</i></p>
+        <p class="card-text text-left">
+          {{ item?.excerpt.rendered | excerpt }}
+        </p>
+        <a [routerLink]="item?.slug" class="btn btn-light">
+          Read more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

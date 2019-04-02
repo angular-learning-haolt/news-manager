@@ -5,15 +5,16 @@ import { NewsComponent } from './news/news.component';
 import { NewsListComponent } from './news-list/news-list.component';
 
 const newsRoutes: Routes = [
-  { path: '', component: NewsComponent, children: [
-    { path: '', component: NewsListComponent
-  }]
-			// { 
-			// path: ':id',
-			// component: PhotoDetailComponent
-			// }
-
-}
+  {
+    path: '',
+    component: NewsComponent,
+    children: [
+      {
+        path: '',
+        component: NewsListComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
