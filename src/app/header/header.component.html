@@ -17,12 +17,12 @@
               </li>
           </ul>
           <div class="authen">
-               <button class="btn btn-dark authen__logout"
-               (click)="onLogOut()"
-               *ngIf="true"
-              >
-                  Log Out
-              </button>
+            <button class="btn btn-dark authen__logout"
+                (click)="onLogOut()"
+                *ngIf="didLogin"
+            >
+                Log Out
+            </button>
           </div>
       </div>
   </nav>

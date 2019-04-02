@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
           console.log(data);
           this.isLogin = true;
           this.cookieService.setCookie('token', data.token, 3);
+          this.loginService.changeStatusLogin(this.isLogin);
           this.router.navigate(['news']);
         },
         error => {

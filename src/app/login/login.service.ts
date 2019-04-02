@@ -6,13 +6,16 @@ import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  
+
   public apiUrl = 'https://demo.crefox.com/news-sun-training/';
   public errStatus: string;
+  public didLogin: BehaviorSubject< boolean >;
 
   constructor(
        private http: HttpClient
-  ) { }
+  ) {
+    this.didLogin = new BehaviorSubject(false);
+  }
 
   sẹndRequestToGetToken(user): Observable<any> {
     return this.http.post(
@@ -34,6 +37,14 @@ export class LoginService {
       this.errStatus = err.status;
       console.log(this.errStatus);
     }
+  }
+
+  changeStatusLogin(val) {
+    this.didLogin.next(val);
+  }
+
+  getStatusLogin() {
+    return this.didLogin;
   }
 
   // build header for request
