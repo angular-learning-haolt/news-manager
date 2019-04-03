@@ -26,4 +26,33 @@
       </div>
     </a>
   </div>
+  {{ newsQuantity }}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Title
+        </th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Tags</th>
+        <th>Comment</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of news">
+        <td>
+          {{ item?.title.rendered }}
+        </td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <td>John</td>
+        <td>Doe</td>
+        <td>
+          {{ item?.date }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
