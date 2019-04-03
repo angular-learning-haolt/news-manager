@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import { CookieService } from './../shared/cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ export class LoginService {
   public didLogin: BehaviorSubject< boolean >;
 
   constructor(
-       private http: HttpClient
+       private http: HttpClient,
+       private cookieService: CookieService
   ) {
-    this.didLogin = new BehaviorSubject(false);
+    const cookieToken  = this.cookieService.getCookie('token');
+    this.didLogin = cookieToken ? new BehaviorSubject(true) : new BehaviorSubject(false);
   }
 
   sẹndRequestToGetToken(user): Observable<any> {

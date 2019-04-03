@@ -15,7 +15,7 @@ const newsRoutes: Routes = [
         component: NewsListComponent
       },
       {
-        path: ':slug',
+        path: ':slug-id',
         component: NewsDetailComponent
       }
     ]

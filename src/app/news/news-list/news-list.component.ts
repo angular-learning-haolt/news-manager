@@ -19,7 +19,7 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     this.newsService.getAllNews().subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.news = data;
       },
       error => {
