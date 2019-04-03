@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NewsComponent } from './news/news.component';
 import { NewsListComponent } from './news-list/news-list.component';
-import { NewDetailComponent } from './news-detail/news-detail.component';
+import { NewsDetailComponent } from './news-detail/news-detail.component';
 
 const newsRoutes: Routes = [
   {
@@ -16,7 +16,7 @@ const newsRoutes: Routes = [
       },
       {
         path: ':slug',
-        component: NewDetailComponent
+        component: NewsDetailComponent
       }
     ]
   }
