@@ -1,3 +1,27 @@
-<p>
-  news-detail works!
-</p>
+<div class="col-md-8 offset-md-2 my-4 py-4">
+  <div class="card text-left">
+    <div class="card-header">
+      <h3 class="card-title text-left">
+        {{ curentNews?.title.rendered }}
+      </h3>
+      <div class="option">
+        <a (click)="onEdit()" class="btn btn-sm btn-warning">
+          Edit
+        </a>
+        <a (click)="onDelete()" class="btn btn-sm btn-danger mx-1">
+          Delete
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <span class="badge badge-secondary badge-light float-left">
+        {{ curentNews?.format }}
+      </span>
+      <span class="float-right"><i>{{ curentNews?.date }}</i></span>
+      <div class="clearfix"></div>
+      <p class="card-text text-left">
+        {{ curentNews?.excerpt.rendered }}
+      </p>
+    </div>
+  </div>
+</div>

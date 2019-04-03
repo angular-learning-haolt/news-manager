@@ -20,7 +20,17 @@ export class NewsService {
       { params: this.buildParams({
         page: 1,
         per_page: 6
-      }) });
+      })}
+    );
+  }
+
+  getNewsByID(id: number) {
+    return this.http.get<any>(
+      this.buildUrl('wp-json/wp/v2/posts/' + id),
+    //   { params: this.buildParams({
+    //     id
+    //   })}
+    );
   }
 
   handleError(err) {
