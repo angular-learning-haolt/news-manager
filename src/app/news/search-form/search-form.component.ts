@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+// import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-search-form',
@@ -14,11 +14,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private subscription: Subscription
+        // private subscription: Subscription
     ) { }
 
     ngOnInit() {
-        this.subscription = this.activatedRoute.queryParams
+        // this.subscription = this.activatedRoute.queryParams
+        //     .subscribe(
+        //         data => this.keywords = data.keywords
+        // )
+        this.activatedRoute.queryParams
             .subscribe(
                 data => this.keywords = data.keywords
         )
@@ -33,6 +37,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         console.log(this.keywords);
     }
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        // this.subscription.unsubscribe();
     }
 }
