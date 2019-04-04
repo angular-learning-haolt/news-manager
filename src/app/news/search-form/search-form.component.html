@@ -10,12 +10,12 @@
         <select class="form-control mx-2" name="selectedCategory"
             [(ngModel)]="selectedCategory"
         >
-            <option value="">
+            <option value="0">
                 All
             </option>
             <option
                 *ngFor="let newsCategory of newsCategories"
-                value="{{ newsCategory?.name }}"
+                value="{{ newsCategory?.id }}"
             >
                 {{ newsCategory?.name }}
             </option>

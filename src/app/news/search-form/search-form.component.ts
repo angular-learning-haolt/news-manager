@@ -13,8 +13,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public keywords = '';
     public newsStatuses: any = [];
     public newsCategories: any = [];
+    public newsCategoriesID: number[];
     public selectedDate: '';
-    public selectedCategory: '';
+    public selectedCategory: number;
     public page = 1;
 
     constructor(
@@ -37,6 +38,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             .subscribe(
                 data => {
                     this.newsCategories = data;
+                    this.newsCategoriesID = data.map((cat) => cat.id);
                 }
             );
         this.newsService.getAllNewsStatus()
@@ -55,8 +57,17 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     // }
 
     onSearch() {
-        // console.log(this.keywords);
-        // console.log(this.selectedCategory, this.selectedDate);
+        this.newsService.getAllNews(
+            1,
+            6,
+            this.keywords,
+            'publish',
+            (+this.selectedCategory) === 0 ? this.newsCategoriesID : this.selectedCategory
+        )
+        .subscribe(
+            data => console.log(data),
+            error => this.newsService.handleError(error)
+        );
     }
 
     ngOnDestroy(): void {

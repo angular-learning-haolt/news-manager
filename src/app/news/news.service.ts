@@ -16,13 +16,43 @@ export class NewsService {
         private http: HttpClient
     ) { }
 
-    getAllNews(page: number, perPage: number) {
+    // getAllNews(page: number, perPage: number) {
+    //     return this.http.get<any>(
+    //         this.buildUrl('wp-json/wp/v2/posts'),
+    //         {
+    //         params: this.buildParams({
+    //             page,
+    //             per_page: perPage
+    //         }),
+    //         observe: 'response'
+    //         }
+    // ).pipe(
+    //     map((response) => {
+    //         const data = response.body;
+    //         const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
+    //         return {
+    //             data,
+    //             postsQuantity: newsQuantity
+    //         };
+    //     })
+    // );
+    // }
+    getAllNews(
+        page: number = 1,
+        perPage: number = 6,
+        s: string = '',
+        status: string = 'publish',
+        categories: number[] | number
+    ) {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/posts'),
             {
             params: this.buildParams({
                 page,
-                per_page: perPage
+                per_page: perPage,
+                search: s,
+                status,
+                categories
             }),
             observe: 'response'
             }
