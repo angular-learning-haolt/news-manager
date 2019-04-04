@@ -39,18 +39,23 @@ export class NewsService {
 
     getAllNewsStatus() {
         return this.http.get<any>(
-            this.buildUrl('wp-json/wp/v2/statuses'),
-            // {
-            //     headers: this.buildHeader({
-            //         token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVtby5jcmVmb3guY29tXC9uZXdzLXN1bi10cmFpbmluZyIsImlhdCI6MTU1NDM0MTA5MSwibmJmIjoxNTU0MzQxMDkxLCJleHAiOjE1NTQ5NDU4OTEsImRhdGEiOnsidXNlciI6eyJpZCI6IjUifX19.nij2sxdZYmTDQGz_BrtmOXmQLB3UbKgHpe_FZnwwMSY'
-            //     })
-            // }
-        )
+            this.buildUrl('wp-json/wp/v2/statuses')
+        );
         // {
         // params: this.buildParams({
         // })
         // })
-    };
+    }
+
+    getAllNewsCategories() {
+        return this.http.get<any>(
+            this.buildUrl('/wp-json/wp/v2/categories')
+        );
+        // {
+        // params: this.buildParams({
+        // })
+        // })
+    }
 
     getResponseHeader() {
         return this.http.get(

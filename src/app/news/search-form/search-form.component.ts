@@ -11,7 +11,11 @@ import { NewsService } from './../news.service';
 export class SearchFormComponent implements OnInit, OnDestroy {
 
     public keywords = '';
-    public newsStatuses:any= [];
+    public newsStatuses: any = [];
+    public newsCategories: any = [];
+    public selectedDate: '';
+    public selectedCategory: '';
+    public page = 1;
 
     constructor(
         private router: Router,
@@ -28,14 +32,21 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.activatedRoute.queryParams
             .subscribe(
                 data => this.keywords = data.keywords
-        );
+            );
+        this.newsService.getAllNewsCategories()
+            .subscribe(
+                data => {
+                    this.newsCategories = data;
+                }
+            );
         this.newsService.getAllNewsStatus()
             .subscribe(
                 data => {
-                    this.newsStatuses = data;
-                    console.log(this.newsStatuses);
+                    // this.newsStatuses = data;
+                    // console.log(this.newsStatuses.publish);
+                    // Chưa bind ra kia đâu =.=
                 }
-        );
+            );
     }
 
     // Input: (ngModelChange)="onChange()"
@@ -45,7 +56,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     onSearch() {
         console.log(this.keywords);
+        console.log(this.selectedCategory, this.selectedDate);
     }
+
     ngOnDestroy(): void {
         // this.subscription.unsubscribe();
     }
