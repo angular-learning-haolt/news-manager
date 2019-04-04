@@ -10,21 +10,22 @@ export class NewsService {
 
     public apiUrl = 'https://demo.crefox.com/news-sun-training/';
     public errStatus: string;
+    public categories;
 
     constructor(
         private http: HttpClient
     ) { }
 
     getAllNews(page: number, perPage: number) {
-    return this.http.get<any>(
-        this.buildUrl('wp-json/wp/v2/posts'),
-        {
-        params: this.buildParams({
-            page,
-            per_page: perPage
-        }),
-        observe: 'response'
-        }
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/posts'),
+            {
+            params: this.buildParams({
+                page,
+                per_page: perPage
+            }),
+            observe: 'response'
+            }
     ).pipe(
         map((response) => {
             const data = response.body;
@@ -41,10 +42,6 @@ export class NewsService {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/statuses')
         );
-        // {
-        // params: this.buildParams({
-        // })
-        // })
     }
 
     getAllNewsCategories() {
@@ -57,6 +54,36 @@ export class NewsService {
         // })
     }
 
+    getCategoryByID(id: number) {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/categories/' + id)
+        ).pipe(
+            map( response => {
+                return response.name;
+            })
+        );
+    }
+
+    getTagByID(id: number) {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/tags/' + id)
+        ).pipe(
+            map( response => {
+                return response.name;
+            })
+        );
+    }
+
+    getAuthorByID(id: number) {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/users/' + id)
+        ).pipe(
+            map( response => {
+                return response.name;
+            })
+        );
+    }
+
     getResponseHeader() {
         return this.http.get(
         this.buildUrl('wp-json/wp/v2/posts'),
@@ -64,8 +91,8 @@ export class NewsService {
     }
 
     getNewsByID(id: number) {
-    return this.http.get<any>(
-        this.buildUrl('wp-json/wp/v2/posts/' + id),
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/posts/' + id),
     //   { params: this.buildParams({
     //     id
     //   })}

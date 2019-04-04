@@ -55,8 +55,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     // }
 
     onSearch() {
-        console.log(this.keywords);
-        console.log(this.selectedCategory, this.selectedDate);
+        // console.log(this.keywords);
+        // console.log(this.selectedCategory, this.selectedDate);
     }
 
     ngOnDestroy(): void {

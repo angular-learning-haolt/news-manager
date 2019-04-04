@@ -10,6 +10,7 @@ import { News } from './../news.class';
 export class NewsListComponent implements OnInit {
 
   public news: News[] = [];
+
   // public newsQuantity: number;
 
   constructor(
@@ -26,6 +27,10 @@ export class NewsListComponent implements OnInit {
       error => {
         this.newsService.handleError(error);
       }
+    );
+    this.newsService.getCategoryByID(2).subscribe(
+      data => console.log(data),
+      error => this.newsService.handleError(error)
     );
   }
 }
