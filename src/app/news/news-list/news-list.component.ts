@@ -19,7 +19,7 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     this.newsService.getAllNews(1, 6).subscribe(
       data => {
-        console.log(data.data);
+        // console.log(data.data);
         this.news = data.data;
         this.newsQuantity = data.postsQuantity;
       },
@@ -28,5 +28,4 @@ export class NewsListComponent implements OnInit {
       }
     );
   }
-
 }

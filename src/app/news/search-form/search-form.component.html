@@ -1,0 +1,14 @@
+<div class="input-group mb-3">
+    <input type="text" class="form-control"
+        [(ngModel)]="keywords"
+    >
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button"
+            [routerLink]="['/news']"
+            [queryParams]="{ keywords: keywords}"
+            (click)="onSearch()"
+        >
+            Search News
+        </button>
+    </div>
+</div>
