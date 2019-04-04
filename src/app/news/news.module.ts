@@ -9,9 +9,10 @@ import { NewsListComponent } from './news-list/news-list.component';
 import { ExcerptPipe } from './excerpt.pipe';
 import { NewsDetailComponent } from './news-detail/news-detail.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { NewsItemComponent } from './news-item/news-item.component';
 
 @NgModule({
-  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent],
+  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent],
   imports: [
     CommonModule,
     NewsRoutingModule,

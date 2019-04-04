@@ -1,0 +1,20 @@
+
+.option {
+    position: absolute;
+    bottom: 0px;
+    left: 15px;
+    cursor: pointer;
+    opacity: 0;
+    transition: .1s;
+}
+.cell-title {
+    position: relative;
+}
+
+tr:hover .option {
+    opacity: 1;
+}
+
+.option span {
+    color: #e1e1e1;
+}

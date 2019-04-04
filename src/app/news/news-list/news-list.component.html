@@ -13,42 +13,48 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of news; let i = index" class="dropdown dropdown-{{i}}">
-                <td class="cell-title pb-4">
-                    <span>
-                        {{ item?.title.rendered }}
-                    </span>
-                    <div class="option">
-                        <a class="text-info"
-                            [routerLink]="item?.slug + '-' + item?.id"
-                        >
-                            View
-                        </a>
-                        <span>|</span>
-                        <a class="text-warning mx-2">
-                            Edit
-                        </a>
-                        <span>|</span>
-                        <a class="text-danger">
-                            Delete
-                        </a>
-                    </div>
-                </td>
-                <td>
-v                   fbg
-                </td>
-                <td>
-                    fb
-                </td>
-                <td>
-                    fgb
-                </td>
-                <td>
-                    vfb
-                </td>
-                <td>
-                    {{ item?.date }}
-                </td>
-            </tr>
+                    <td class="cell-title pb-4">
+                        <span>
+                            {{ item?.title.rendered }}
+                        </span>
+                        <div class="option">
+                            <a class="text-info"
+                                [routerLink]="item?.slug + '-' + item?.id"
+                            >
+                                View
+                            </a>
+                            <span>|</span>
+                            <a class="text-warning mx-2">
+                                Edit
+                            </a>
+                            <span>|</span>
+                            <a class="text-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        fbg
+                    </td>
+                    <td>
+                        fb
+                    </td>
+                    <td>
+                        fgb
+                    </td>
+                    <td>
+                        vfb
+                    </td>
+                    <td>
+                        {{ item?.date }}
+                    </td>
+                </tr>
+            <!-- <app-news-item 
+                *ngFor="let item of news; let i = index"
+                [item]="item"
+                [i]="i"
+            >
+            </app-news-item> -->
         </tbody>
     </table>
 </div>

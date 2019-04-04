@@ -10,7 +10,7 @@ import { News } from './../news.class';
 export class NewsListComponent implements OnInit {
 
   public news: News[] = [];
-  public newsQuantity: number;
+  // public newsQuantity: number;
 
   constructor(
     private newsService: NewsService
@@ -19,9 +19,9 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     this.newsService.getAllNews(1, 6).subscribe(
       data => {
-        // console.log(data.data);
+        console.log(data.data);
         this.news = data.data;
-        this.newsQuantity = data.postsQuantity;
+        // this.newsQuantity = data.postsQuantity;
       },
       error => {
         this.newsService.handleError(error);

@@ -6,25 +6,6 @@ a, a:hover, a:visited, a:link {
 a.btn.btn-secondary {
     color: #fff;
 }
-.option {
-    position: absolute;
-    bottom: 0px;
-    left: 15px;
-    cursor: pointer;
-    opacity: 0;
-    transition: .1s;
-}
-.cell-title {
-    position: relative;
-}
-
-tr:hover .option {
-    opacity: 1;
-}
-
-.option span {
-    color: #e1e1e1;
-}
 
 .news-status a {
     color: #333;
