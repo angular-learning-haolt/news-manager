@@ -9,17 +9,25 @@ import { News } from './../news.class';
 })
 export class NewsListComponent implements OnInit {
 
-  public news: News[] = [];
+  public news;
   public newsCategories: any = [];
   public newsCategoriesID: number[];
-  // public newsQuantity: number;
+  public newsQuantity: number;
 
   constructor(
     private newsService: NewsService
   ) {}
 
   ngOnInit() {
-
+    // this.newsService.getAllNewsByCondition().subscribe(
+    //   data => {
+    //     this.news = data.data;
+    //     this.newsQuantity = data.postsQuantity;
+    //   },
+    //   error => {
+    //     this.newsService.handleError(error);
+    //   }
+    // );
     this.newsService.getAllNews(
       1,
       6,
@@ -41,12 +49,12 @@ export class NewsListComponent implements OnInit {
     //   error => this.newsService.handleError(error)
     // );
 
-    this.newsService.getAllNewsCategories()
-      .subscribe(
-        data => {
-          this.newsCategories = data;
-          this.newsCategoriesID = data.map((cat) => cat.id);
-        }
-    );
+    // this.newsService.getAllNewsCategories()
+    //   .subscribe(
+    //     data => {
+    //       this.newsCategories = data;
+    //       this.newsCategoriesID = data.map((cat) => cat.id);
+    //     }
+    // );
   }
 }

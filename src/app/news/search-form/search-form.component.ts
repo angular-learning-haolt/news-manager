@@ -68,6 +68,18 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             data => console.log(data),
             error => this.newsService.handleError(error)
         );
+        this.newsService.addCard();
+    }
+
+    _onSearch() {
+        console.log(this.keywords, this.selectedCategory);
+        this.newsService.onSearch(
+            1,
+            6,
+            this.keywords,
+            'publish',
+            (this.selectedCategory) === undefined ? this.newsCategoriesID : this.selectedCategory
+        );
     }
 
     ngOnDestroy(): void {

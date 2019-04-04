@@ -28,7 +28,7 @@
                 date: selectedDate,
                 status: 'publish'
             }"
-            (click)="onSearch()"
+            (click)="_onSearch()"
         >
             Filter
         </button>
@@ -43,7 +43,7 @@
                     date: selectedDate,
                     status: 'publish'
                 }"
-                (click)="onSearch()"
+                (click)="_onSearch()"
             >
                 Publish
             </a>
@@ -66,7 +66,7 @@
                         status: 'publish',
                         page: page
                     }"
-                    (click)="onSearch()"
+                    (click)="_onSearch()"
                 >
                     Search News
                 </button>
@@ -83,7 +83,7 @@
                         status: 'publish',
                         page: page - 1
                     }"
-                    (click)="onSearch()"
+                    (click)="_onSearch()"
                 >
                     Previous
                 </a>
@@ -98,7 +98,7 @@
                         status: 'publish',
                         page: page
                     }"
-                    (click)="onSearch()"
+                    (click)="_onSearch()"
                 >
                     1
                 </a>
@@ -113,7 +113,7 @@
                         status: 'publish',
                         page: page
                     }"
-                    (click)="onSearch()"
+                    (click)="_onSearch()"
                 >
                     2
                 </a>
@@ -133,7 +133,7 @@
                         status: 'publish',
                         page: page + 1
                     }"
-                    (click)="onSearch()"
+                    (click)="_onSearch()"
                 >
                     Next
                 </a>
