@@ -22,13 +22,13 @@
         </select>
         <button class="btn btn-outline-secondary" type="button"
             [routerLink]="['/news']"
-            [queryParams]="{ 
+            [queryParams]="{
                 s: keywords,
                 category: selectedCategory,
                 date: selectedDate,
                 status: 'publish'
             }"
-            (click)="_onSearch()"
+            (click)="onSearch()"
         >
             Filter
         </button>
@@ -37,13 +37,13 @@
             <span class="news-status-devide mx-2">|</span>
             <a class="text-success"
                 [routerLink]="['/news']"
-                [queryParams]="{ 
+                [queryParams]="{
                     s: keywords,
                     category: selectedCategory,
                     date: selectedDate,
                     status: 'publish'
                 }"
-                (click)="_onSearch()"
+                (click)="onSearch()"
             >
                 Publish
             </a>
@@ -59,85 +59,61 @@
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button"
                     [routerLink]="['/news']"
-                    [queryParams]="{ 
+                    [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
                         date: selectedDate,
                         status: 'publish',
                         page: page
                     }"
-                    (click)="_onSearch()"
+                    (click)="onSearch()"
                 >
                     Search News
                 </button>
             </div>
         </div>
         <ul class="pagination float-right">
-            <li class="page-item">
-                <a class="page-link"
+            <li>
+                <button class="btn btn-outline-secondary" type="button"
                     [routerLink]="['/news']"
-                    [queryParams]="{ 
+                    [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
                         date: selectedDate,
                         status: 'publish',
                         page: page - 1
                     }"
-                    (click)="_onSearch()"
+                    (click)="goToPreviousPage(); onSearch()"
                 >
                     Previous
-                </a>
+                </button>
             </li>
             <li class="page-item">
-                <a class="page-link"
-                    [routerLink]="['/news']"
-                    [queryParams]="{ 
-                        s: keywords,
-                        category: selectedCategory,
-                        date: selectedDate,
-                        status: 'publish',
-                        page: page
-                    }"
-                    (click)="_onSearch()"
+                <input type="number" class="form-control"
+                    [(ngModel)]="page"
+                    [defaultValue]="1"
                 >
-                    1
-                </a>
             </li>
-            <li class="page-item">
-                <a class="page-link"
+            <li>
+                <button class="btn btn-outline-secondary" type="button"
                     [routerLink]="['/news']"
-                    [queryParams]="{ 
-                        s: keywords,
-                        category: selectedCategory,
-                        date: selectedDate,
-                        status: 'publish',
-                        page: page
-                    }"
-                    (click)="_onSearch()"
-                >
-                    2
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">
-                    3<!-- {{ newsQuantity }} -->
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                    [routerLink]="['/news']"
-                    [queryParams]="{ 
+                    [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
                         date: selectedDate,
                         status: 'publish',
                         page: page + 1
                     }"
-                    (click)="_onSearch()"
+                    (click)="goToNextPage(); onSearch()"
                 >
                     Next
-                </a>
+                </button>
             </li>
+            <!-- <li class="page-item">
+                <a class="page-link" href="#">
+                    {{ newsQuantity }}
+                </a>
+            </li> -->
         </ul>
         <div class="clearfix"></div>
     </div>

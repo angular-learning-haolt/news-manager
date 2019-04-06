@@ -34,77 +34,16 @@ export class NewsService {
         return this.cardSbj;
     }
 
-    onSearch(
-        page: number = 1,
-        perPage: number = 6,
-        s: string = '',
-        status: string = 'publish',
-        categories: number[] | number
-    ) {
-        this.http.get<any>(
-            this.buildUrl('wp-json/wp/v2/posts'),
-            {
-            params: this.buildParams({
-                page,
-                per_page: perPage,
-                search: s,
-                status,
-                categories
-            }),
-            observe: 'response'
-            }
-    ).pipe(
-        map((response) => {
-            const data = response.body;
-            const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
-            return {
-                data,
-                postsQuantity: newsQuantity
-            };
-        })
-        ).subscribe(
-            data => {
-                // console.log('TRong service: ', data);
-                // this.result = data;
-                this.result.next(data);
-            },
-            error => {
-                this.handleError(error);
-            }
-        );
-    }
-
     getAllNewsByCondition() {
         return this.result;
     }
 
-    // getAllNews(page: number, perPage: number) {
-    //     return this.http.get<any>(
-    //         this.buildUrl('wp-json/wp/v2/posts'),
-    //         {
-    //         params: this.buildParams({
-    //             page,
-    //             per_page: perPage
-    //         }),
-    //         observe: 'response'
-    //         }
-    // ).pipe(
-    //     map((response) => {
-    //         const data = response.body;
-    //         const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
-    //         return {
-    //             data,
-    //             postsQuantity: newsQuantity
-    //         };
-    //     })
-    // );
-    // }
     getAllNews(
         page: number = 1,
         perPage: number = 6,
         s: string = '',
         status: string = 'publish',
-        categories: number[] | number
+        // categories: null | number
     ) {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/posts'),
@@ -114,7 +53,7 @@ export class NewsService {
                 per_page: perPage,
                 search: s,
                 status,
-                categories
+                // categories
             }),
             observe: 'response'
             }

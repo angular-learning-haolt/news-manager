@@ -1,4 +1,4 @@
-<app-search-form></app-search-form>
+<app-search-form (conditionOnSearch)="onGetconditionOnSearch($event)"></app-search-form>
 <div class="row">
     <table class="table table-striped table-hover">
         <thead>
@@ -49,12 +49,6 @@
                         {{ item?.date }}
                     </td>
                 </tr>
-            <!-- <app-news-item 
-                *ngFor="let item of news; let i = index"
-                [item]="item"
-                [i]="i"
-            >
-            </app-news-item> -->
         </tbody>
     </table>
 </div>
