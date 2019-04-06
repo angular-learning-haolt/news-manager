@@ -9,7 +9,7 @@ import { News } from './../news.class';
 })
 export class NewsListComponent implements OnInit {
 
-  public news;
+  public news: any;
   public newsCategories: any = [];
   public newsCategoriesID: number[];
   public newsQuantity: number;
@@ -27,30 +27,23 @@ export class NewsListComponent implements OnInit {
 
   ngOnInit() {
       this.getAllNews();
-    // this.newsService.getAllNewsByCondition().subscribe(
-    //   data => {
-    //     this.news = data.data;
-    //     this.newsQuantity = data.postsQuantity;
-    //   },
-    //   error => {
-    //     this.newsService.handleError(error);
-    //   }
-    // );
 
-
-
-    // this.newsService.getCategoryByID(2).subscribe(
-    //   data => console.log(data),
-    //   error => this.newsService.handleError(error)
-    // );
-
-    // this.newsService.getAllNewsCategories()
-    //   .subscribe(
-    //     data => {
-    //       this.newsCategories = data;
-    //       this.newsCategoriesID = data.map((cat) => cat.id);
-    //     }
-    // );
+      this.newsService.getAllNewsCategories()
+        .subscribe(
+            data => {
+              this.newsCategories = data;
+              console.log('Cates:', data);
+              localStorage.setItem("categories", JSON.stringify(data));
+            }
+        );
+      this.newsService.getAllNewsTags()
+        .subscribe(
+            data => {
+              this.newsCategories = data;
+              console.log('Tags:', data);
+              localStorage.setItem("tags", JSON.stringify(data));
+            }
+        );
 
   }
 
@@ -66,7 +59,7 @@ export class NewsListComponent implements OnInit {
         data => {
             this.news = data.data;
             this.newsQuantity = data.postsQuantity;
-            console.log(this.news);
+            console.log('NewsList Result: ', this.news);
         },
         error => {
             this.newsService.handleError(error);
@@ -74,7 +67,7 @@ export class NewsListComponent implements OnInit {
     );
   }
 
-  onGetconditionOnSearch(value) {
+  onGetconditionOnSearch(value: { keywords: string; category: string | number; }) {
     // if (value.page < 0) {
     //     value.page = 1;
     // }
@@ -87,7 +80,7 @@ export class NewsListComponent implements OnInit {
         value.category = +value.category;
     }
     this.conditionOnSearch = value;
-    console.log(this.conditionOnSearch);
+    console.log('Conditions onSearch: ', this.conditionOnSearch);
     this.getAllNews();
   }
 }

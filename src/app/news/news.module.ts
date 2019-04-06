@@ -10,9 +10,12 @@ import { ExcerptPipe } from './excerpt.pipe';
 import { NewsDetailComponent } from './news-detail/news-detail.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { NewsItemComponent } from './news-item/news-item.component';
+import { MapCategoryPipe } from './map-category.pipe';
+import { MapTagsPipe } from './map-tags.pipe';
+import { MapAuthorPipe } from './map-author.pipe';
 
 @NgModule({
-  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent],
+  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent, MapCategoryPipe, MapTagsPipe, MapAuthorPipe],
   imports: [
     CommonModule,
     NewsRoutingModule,

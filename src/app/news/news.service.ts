@@ -78,11 +78,23 @@ export class NewsService {
     getAllNewsCategories() {
         return this.http.get<any>(
             this.buildUrl('/wp-json/wp/v2/categories')
-        );
-        // {
-        // params: this.buildParams({
-        // })
-        // })
+        )
+        // .pipe(
+        //     map((cate) => {
+        //         cates = [];
+        //         let _cate = {
+        //             id: cate.id,
+        //             name: cate.name
+        //         }
+        //         cates.push(_cate);
+        //     })
+        // )
+    }
+
+    getAllNewsTags() {
+        return this.http.get<any>(
+            this.buildUrl('/wp-json/wp/v2/tags')
+        )
     }
 
     getCategoryByID(id: number) {
@@ -108,11 +120,7 @@ export class NewsService {
     getAuthorByID(id: number) {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/users/' + id)
-        ).pipe(
-            map( response => {
-                return response.name;
-            })
-        );
+        )
     }
 
     getResponseHeader() {
