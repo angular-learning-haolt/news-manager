@@ -33,7 +33,7 @@ export class NewsListComponent implements OnInit {
             data => {
               this.newsCategories = data;
               console.log('Cates:', data);
-              localStorage.setItem("categories", JSON.stringify(data));
+              localStorage.setItem('categories', JSON.stringify(data));
             }
         );
       this.newsService.getAllNewsTags()
@@ -41,7 +41,7 @@ export class NewsListComponent implements OnInit {
             data => {
               this.newsCategories = data;
               console.log('Tags:', data);
-              localStorage.setItem("tags", JSON.stringify(data));
+              localStorage.setItem('tags', JSON.stringify(data));
             }
         );
 

@@ -8,7 +8,8 @@ import { CookieService } from './../shared/cookie.service';
 })
 export class LoginService {
 
-  public apiUrl = 'https://demo.crefox.com/news-sun-training/';
+//   public apiUrl = 'https://demo.crefox.com/news-sun-training/';
+  public apiUrl = 'http://localhost:8080/news/';
   public errStatus: string;
   public didLogin: BehaviorSubject< boolean >;
 

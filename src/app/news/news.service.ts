@@ -9,7 +9,8 @@ import { News } from './news.class';
 })
 export class NewsService {
 
-    public apiUrl = 'https://demo.crefox.com/news-sun-training/';
+    // public apiUrl = 'https://demo.crefox.com/news-sun-training/';
+    public apiUrl = 'http://localhost:8080/news/';
     public errStatus: string;
     public categories;
     public cardSbj: BehaviorSubject<any[] | null >;
@@ -45,6 +46,8 @@ export class NewsService {
         status: string = 'publish',
         // categories: null | number
     ) {
+        // let params = new HttpParams();
+        // params = params.append('page', '5');
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/posts'),
             {
