@@ -1,54 +1,63 @@
-<app-search-form (conditionOnSearch)="onGetconditionOnSearch($event)"></app-search-form>
+<app-search-form [newsQuantity]="newsQuantity"
+    (conditionOnSearch)="onGetconditionOnSearch($event)"></app-search-form>
 <div class="row">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Tags</th>
-                <th>Comment</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of news; let i = index" class="dropdown dropdown-{{i}}">
-                    <td class="cell-title pb-4">
-                        <span>
-                            {{ item?.title.rendered }}
-                        </span>
-                        <div class="option">
-                            <a class="text-info"
-                                [routerLink]="item?.slug + '-' + item?.id"
-                            >
-                                View
-                            </a>
-                            <span>|</span>
-                            <a class="text-warning mx-2">
-                                Edit
-                            </a>
-                            <span>|</span>
-                            <a class="text-danger">
-                                Delete
-                            </a>
+    <div class="col-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="allNews">
+                            <label class="custom-control-label" for="allNews">Title</label>
                         </div>
-                    </td>
-                    <td>
-                        fbg
-                    </td>
-                    <td>
-                        {{ item?.categories | mapCategory }}
-                    </td>
-                    <td>
-                        {{ item?.tags | mapTags }}
-                    </td>
-                    <td>
-                        vfb
-                    </td>
-                    <td>
-                        {{ item?.date }}
-                    </td>
+                    </th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th>Comment</th>
+                    <th>Date</th>
                 </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of news; let i = index" class="dropdown dropdown-{{i}}">
+                        <td class="cell-title pb-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="{{ item?.id }}">
+                                <label class="custom-control-label" for="{{ item?.id }}">{{ item?.title.rendered }}</label>
+                            </div>
+                            <div class="option">
+                                <a class="text-info"
+                                    [routerLink]="item?.slug + '-' + item?.id"
+                                >
+                                    View
+                                </a>
+                                <span>|</span>
+                                <a class="text-warning mx-2">
+                                    Edit
+                                </a>
+                                <span>|</span>
+                                <a class="text-danger">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            fbg
+                        </td>
+                        <td>
+                            {{ item?.categories | mapCategory }}
+                        </td>
+                        <td>
+                            {{ item?.tags | mapTags }}
+                        </td>
+                        <td>
+                            vfb
+                        </td>
+                        <td>
+                            {{ item?.date }}
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

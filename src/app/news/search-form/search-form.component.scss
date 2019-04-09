@@ -10,4 +10,19 @@ select {
 }
 input.form-control {
     width: 60px;
+    display: inline;
+}
+.form-check.form-check-inline input {
+    opacity: 0;
+}
+a.btn.btn-custom.btn-light {
+    border: 1px solid #80808063;
+    margin: 0 1px;
+}
+label.newsQuantity {
+    margin: 5px 1px;
+}
+a.btn.btn-custom.btn-light i {
+    color: #c1c1c1c7;
+    font-size: 12px;
 }

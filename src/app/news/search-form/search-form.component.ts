@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { Subscription } from 'rxjs/Subscription';
 import { NewsService } from './../news.service';
@@ -11,6 +11,7 @@ import { NewsService } from './../news.service';
 export class SearchFormComponent implements OnInit, OnDestroy {
 
     public keywords = 'dfdgb';
+    public status = 'publish';
     public newsStatuses: any = [];
     public newsCategories: any = [];
     public newsCategoriesID: number[];
@@ -26,6 +27,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) { }
 
     @Output() conditionOnSearch = new EventEmitter<any>();
+    @Input() newsQuantity;
+    public pageQuantity;
 
     onSearch() {
         this.conditionOnSearch.emit(
@@ -33,17 +36,21 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 page: this.page,
                 perPage: 6,
                 keywords: this.keywords,
-                postStatus: 'publish',
+                postStatus: this.status,
                 category: this.selectedCategory
             }
         );
+        console.log(this.newsQuantity);
+        console.log({
+            page: this.page,
+            perPage: 6,
+            keywords: this.keywords,
+            postStatus: this.status,
+            category: this.selectedCategory
+        });
     }
 
     ngOnInit() {
-        // this.subscription = this.activatedRoute.queryParams
-        //     .subscribe(
-        //         data => this.keywords = data.keywords
-        // )
         this.activatedRoute.queryParams
             .subscribe(
                 data => this.keywords = data.keywords
@@ -55,14 +62,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     this.newsCategoriesID = data.map((cat) => cat.id);
                 }
             );
-        this.newsService.getAllNewsStatus()
-            .subscribe(
-                data => {
-                    // this.newsStatuses = data;
-                    // console.log(this.newsStatuses.publish);
-                    // Chưa bind ra kia đâu =.=
-                }
-            );
     }
 
     goToPreviousPage() {
@@ -72,44 +71,22 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     goToNextPage() {
-        this.page += 1;
+        this.pageQuantity = this.newsQuantity / 6;
+        if (this.page <= this.pageQuantity) {
+            this.page += 1; 
+        }
     }
-    // Input: (ngModelChange)="onChange()"
-    // onChange() {
-    //     console.log(this.keywords);
-    // }
-
-    // onSearch() {
-    //     console.log(1, 6, this.keywords, 'publish', this.selectedCategory);
-    // }
-
-    // onSearch() {
-    //     this.newsService.getAllNews(
-    //         1,
-    //         6,
-    //         this.keywords,
-    //         'publish',
-    //         (+this.selectedCategory) === 0 ? this.newsCategoriesID : this.selectedCategory
-    //     )
-    //     .subscribe(
-    //         data => console.log(data),
-    //         error => this.newsService.handleError(error)
-    //     );
-    //     this.newsService.addCard();
-    // }
-
-    // _onSearch() {
-    //     console.log(this.keywords, this.selectedCategory);
-    //     this.newsService.onSearch(
-    //         1,
-    //         6,
-    //         this.keywords,
-    //         'publish',
-    //         (this.selectedCategory) === undefined ? this.newsCategoriesID : this.selectedCategory
-    //     );
-    // }
 
     ngOnDestroy(): void {
         // this.subscription.unsubscribe();
     }
+
+    goToLastPage() {
+        this.page = Math.ceil(this.newsQuantity / 6);
+    }
+
+    goToFirstPage() {
+        this.page = 1;
+    }
+    onBulkAction() { }
 }

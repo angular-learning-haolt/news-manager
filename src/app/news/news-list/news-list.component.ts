@@ -60,6 +60,7 @@ export class NewsListComponent implements OnInit {
             this.news = data.data;
             this.newsQuantity = data.postsQuantity;
             console.log('NewsList Result: ', this.news);
+            console.log('News Quantity: ', this.newsQuantity);
         },
         error => {
             this.newsService.handleError(error);

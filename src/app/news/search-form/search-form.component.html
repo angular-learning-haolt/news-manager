@@ -1,12 +1,23 @@
 <div class="row mt-4">
     <div class="col-md-8">
         <h3 class="mb-4">News List</h3>
-        <select class="form-control" name="selectedDate"
+        <!-- <select class="form-control" name="selectedDate"
             [(ngModel)]="selectedDate"
         >
             <option value="">Date</option>
             <option value="">Select1</option>
+        </select> -->
+        <select class="form-control mr-2" name="action"
+        >
+            <option value="">Bulk Action</option>
+            <option value="delete">Delete</option>
+            <option value="edit">Edit</option>
         </select>
+        <button class="btn btn-outline-secondary" type="button"
+            (click)="onBulkAction()"
+        >
+            Apply
+        </button>
         <select class="form-control mx-2" name="selectedCategory"
             [(ngModel)]="selectedCategory"
         >
@@ -25,31 +36,57 @@
             [queryParams]="{
                 s: keywords,
                 category: selectedCategory,
-                date: selectedDate,
-                status: 'publish'
+                status: this.status
             }"
             (click)="onSearch()"
         >
             Filter
         </button>
-        <p class="news-status mt-2">
-            <a class="text-success">All</a>
-            <span class="news-status-devide mx-2">|</span>
-            <a class="text-success"
+
+        <div class="form-check form-check-inline">
+            <input [(ngModel)]="status"
+                (ngModelChange)="onSearch()"
                 [routerLink]="['/news']"
                 [queryParams]="{
                     s: keywords,
                     category: selectedCategory,
-                    date: selectedDate,
-                    status: 'publish'
+                    status: this.status
                 }"
-                (click)="onSearch()"
-            >
+                class="form-check-input" type="radio" id="all" value="">
+            <label class="form-check-label text-success" for="all">
+                All
+            </label>
+        </div>
+        <span class="news-status-devide mx-2">|</span>
+        <div class="form-check form-check-inline">
+            <input [(ngModel)]="status"
+                (ngModelChange)="onSearch()"
+                [routerLink]="['/news']"
+                [queryParams]="{
+                    s: keywords,
+                    category: selectedCategory,
+                    status: this.status
+                }"
+                class="form-check-input" type="radio" id="publish" value="publish">
+            <label class="form-check-label text-success" for="publish">
                 Publish
-            </a>
-            <span class="news-status-devide mx-2">|</span>
-            <a class="text-success">Draft</a>
-        </p>
+            </label>
+        </div>
+        <span class="news-status-devide mx-2">|</span>
+        <div class="form-check form-check-inline">
+            <input [(ngModel)]="status"
+                (ngModelChange)="onSearch()"
+                [routerLink]="['/news']"
+                [queryParams]="{
+                    s: keywords,
+                    category: selectedCategory,
+                    status: this.status
+                }"
+                class="form-check-input" type="radio" id="draft" value="draft">
+            <label class="form-check-label text-success" for="draft">
+                Draft
+            </label>
+        </div>
     </div>
     <div class="col-md-4">
         <div class="input-group mb-3">
@@ -62,8 +99,7 @@
                     [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
-                        date: selectedDate,
-                        status: 'publish',
+                        status: this.status,
                         page: page
                     }"
                     (click)="onSearch()"
@@ -73,41 +109,67 @@
             </div>
         </div>
         <ul class="pagination float-right">
+            <label class="newsQuantity">
+                {{ newsQuantity }}  items
+            </label>
             <li>
-                <button class="btn btn-outline-secondary" type="button"
-                    [routerLink]="['/news']"
+                <a class="btn btn-custom btn-light" [routerLink]="['/news']"
                     [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
-                        date: selectedDate,
-                        status: 'publish',
+                        status: this.status,
+                        page: 1
+                    }"
+                    (click)="goToFirstPage(); onSearch()"
+                >
+                    <i class="fas fa-less-than"></i>
+                    <i class="fas fa-less-than"></i>
+                </a>
+                <a class="btn btn-custom btn-light" [routerLink]="['/news']"
+                    [queryParams]="{
+                        s: keywords,
+                        category: selectedCategory,
+                        status: this.status,
                         page: page - 1
                     }"
                     (click)="goToPreviousPage(); onSearch()"
                 >
-                    Previous
-                </button>
+                    <i class="fas fa-less-than"></i>
+                </a>
             </li>
             <li class="page-item">
-                <input type="number" class="form-control"
-                    [(ngModel)]="page"
-                    [defaultValue]="1"
-                >
+                <label class="mx-1">
+                    <input type="number" class="form-control"
+                        [(ngModel)]="page"
+                        [defaultValue]="1"
+                    >
+                    of {{ newsQuantity | pageQuantity }}
+                </label>
             </li>
             <li>
-                <button class="btn btn-outline-secondary" type="button"
-                    [routerLink]="['/news']"
+                <a class="btn btn-custom btn-light" [routerLink]="['/news']"
                     [queryParams]="{
                         s: keywords,
                         category: selectedCategory,
-                        date: selectedDate,
-                        status: 'publish',
+                        status: this.status,
                         page: page + 1
                     }"
                     (click)="goToNextPage(); onSearch()"
                 >
-                    Next
-                </button>
+                    <i class="fas fa-greater-than"></i>
+                </a>
+                <a class="btn btn-custom btn-light" [routerLink]="['/news']"
+                    [queryParams]="{
+                        s: keywords,
+                        category: selectedCategory,
+                        status: this.status,
+                        page: this.newsQuantity | pageQuantity
+                    }"
+                    (click)="goToLastPage();onSearch()"
+                >
+                    <i class="fas fa-greater-than"></i>
+                    <i class="fas fa-greater-than"></i>
+                </a>
             </li>
             <!-- <li class="page-item">
                 <a class="page-link" href="#">
