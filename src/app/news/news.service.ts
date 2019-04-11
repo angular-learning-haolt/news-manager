@@ -171,6 +171,15 @@ export class NewsService {
     );
     }
 
+    deleteNewsByID(id: number) {
+        return this.http.delete<any>(
+            this.buildUrl('wp-json/wp/v2/posts/' + id),
+    //   { params: this.buildParams({
+    //     id
+    //   })}
+    );
+    }
+
     handleError(err) {
     if (err.error instanceof Error) {
         console.log(`Client side Error: ${ err.error.message }`);

@@ -36,7 +36,9 @@
                                     Edit
                                 </a>
                                 <span>|</span>
-                                <a class="text-danger">
+                                <a class="text-danger"
+                                    (click)="onDeleteItem(item?.id)"
+                                >
                                     Delete
                                 </a>
                             </div>

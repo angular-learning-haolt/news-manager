@@ -72,4 +72,11 @@ export class NewsListComponent implements OnInit {
     console.log('Log tại onGetConditional: ', this.conditionOnSearch);
     this.getAllNews();
   }
+
+  onDeleteItem(id) {
+    this.newsService.deleteNewsByID(id).subscribe((data) => {
+      console.log('Đã xóa: ', data);
+      this.getAllNews();
+    });
+  }
 }
