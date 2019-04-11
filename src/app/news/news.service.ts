@@ -44,32 +44,62 @@ export class NewsService {
         perPage: number = 6,
         s: string = '',
         status: string = 'publish',
-        // categories: null | number
+        categories: null | number
     ) {
-        // let params = new HttpParams();
-        // params = params.append('page', '5');
-        return this.http.get<any>(
-            this.buildUrl('wp-json/wp/v2/posts'),
-            {
-            params: this.buildParams({
-                page,
-                per_page: perPage,
-                search: s,
-                status,
-                // categories
-            }),
-            observe: 'response'
-            }
-    ).pipe(
-        map((response) => {
-            const data = response.body;
-            const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
-            return {
-                data,
-                postsQuantity: newsQuantity
-            };
-        })
-    );
+
+        // let params = new HttpParams({});
+        // params = params.append('page', '2');
+        // params = params.append('perPage', '6');
+        // params = params.append('s', s);
+        // params = params.append('status', status);
+        // if (categories !== 0) {
+        //     params = params.append('categories', '2');
+        // }
+        // console.log('Log in Service: ', params);
+        if (categories !== 0) {
+            return this.http.get<any>(
+                this.buildUrl('wp-json/wp/v2/posts'),
+                {
+                params: this.buildParams({
+                    page,
+                    per_page: perPage,
+                    search: s,
+                    status,
+                    categories
+                }),
+                observe: 'response'
+            }).pipe(
+                map((response) => {
+                    const data = response.body;
+                    const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
+                    return {
+                        data,
+                        postsQuantity: newsQuantity
+                    };
+                })
+            );
+        } else {
+            return this.http.get<any>(
+                this.buildUrl('wp-json/wp/v2/posts'),
+                {
+                params: this.buildParams({
+                    page,
+                    per_page: perPage,
+                    search: s,
+                    status
+                }),
+                observe: 'response'
+            }).pipe(
+                map((response) => {
+                    const data = response.body;
+                    const newsQuantity = parseInt(response.headers.get('x-wp-total'), 10);
+                    return {
+                        data,
+                        postsQuantity: newsQuantity
+                    };
+                })
+            );
+        }
     }
 
     getAllNewsStatus() {

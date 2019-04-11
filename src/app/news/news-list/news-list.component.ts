@@ -18,7 +18,8 @@ export class NewsListComponent implements OnInit {
       page: 1,
       perPage: 6,
       keywords: '',
-      postStatus: 'publish'
+      postStatus: 'publish',
+      category: 0
   };
 
   constructor(
@@ -26,9 +27,9 @@ export class NewsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      this.getAllNews();
 
-      this.newsService.getAllNewsCategories()
+    this.getAllNews();
+    this.newsService.getAllNewsCategories()
         .subscribe(
             data => {
               this.newsCategories = data;
@@ -36,7 +37,7 @@ export class NewsListComponent implements OnInit {
               localStorage.setItem('categories', JSON.stringify(data));
             }
         );
-      this.newsService.getAllNewsTags()
+    this.newsService.getAllNewsTags()
         .subscribe(
             data => {
               this.newsCategories = data;
@@ -53,35 +54,22 @@ export class NewsListComponent implements OnInit {
         this.conditionOnSearch.perPage,
         this.conditionOnSearch.keywords,
         this.conditionOnSearch.postStatus,
-        // this.conditionOnSearch.category
-    )
-    .subscribe(
-        data => {
-            this.news = data.data;
-            this.newsQuantity = data.postsQuantity;
-            console.log('NewsList Result: ', this.news);
-            console.log('News Quantity: ', this.newsQuantity);
-        },
-        error => {
-            this.newsService.handleError(error);
-        }
-    );
+        this.conditionOnSearch.category
+    ).subscribe((data) => {
+        console.log(data);
+        this.news = data.data;
+        this.newsQuantity = data.postsQuantity;
+
+    });
   }
 
   onGetconditionOnSearch(value: { keywords: string; category: string | number; }) {
-    // if (value.page < 0) {
-    //     value.page = 1;
-    // }
     if (value.keywords === undefined) {
         value.keywords = '';
     }
-    if (value.category === '0') {
-        delete value.category;
-    } else {
-        value.category = +value.category;
-    }
+    value.category = +value.category;
     this.conditionOnSearch = value;
-    console.log('Conditions onSearch: ', this.conditionOnSearch);
+    console.log('Log tại onGetConditional: ', this.conditionOnSearch);
     this.getAllNews();
   }
 }

@@ -40,14 +40,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 category: this.selectedCategory
             }
         );
-        console.log(this.newsQuantity);
-        console.log({
-            page: this.page,
-            perPage: 6,
-            keywords: this.keywords,
-            postStatus: this.status,
-            category: this.selectedCategory
-        });
+        // console.log(this.newsQuantity);
+        // console.log({
+        //     page: this.page,
+        //     perPage: 6,
+        //     keywords: this.keywords,
+        //     postStatus: this.status,
+        //     category: this.selectedCategory
+        // });
     }
 
     ngOnInit() {
@@ -73,7 +73,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     goToNextPage() {
         this.pageQuantity = this.newsQuantity / 6;
         if (this.page <= this.pageQuantity) {
-            this.page += 1; 
+            this.page += 1;
         }
     }
 
