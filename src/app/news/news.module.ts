@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewsRoutingModule } from './news-routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token-interceptor';
 import { FormsModule } from '@angular/forms';
 
 import { NewsComponent } from './news/news.component';
@@ -22,6 +23,13 @@ import { PageQuantityPipe } from './page-quantity.pipe';
     NewsRoutingModule,
     HttpClientModule,
     FormsModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ]
 })
 export class NewsModule { }
