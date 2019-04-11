@@ -20,7 +20,6 @@ export class TokenInterceptor implements HttpInterceptor {
     
     let requestOption:any = {};
     const cookieToken  = this.cookieService.getCookie('token');
-    console.log(cookieToken);
     if(cookieToken) {
       requestOption.setHeaders = {
         Authorization: `Bearer ${cookieToken}`

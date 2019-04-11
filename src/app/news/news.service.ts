@@ -17,6 +17,8 @@ export class NewsService {
     public result: BehaviorSubject<any | null >;
     public newsQuantity: BehaviorSubject<number>;
     public conditions: BehaviorSubject<any[]>;
+    public $allDeleteNews: BehaviorSubject<any>;
+    public allDeleteNews: number[] = [];
 
     constructor(
         private http: HttpClient
@@ -25,6 +27,7 @@ export class NewsService {
         this.result = new BehaviorSubject(null);
         this.newsQuantity = new BehaviorSubject(1);
         this.conditions = new BehaviorSubject([]);
+        this.$allDeleteNews = new BehaviorSubject([]);
     }
 
     addCard() {
@@ -33,6 +36,19 @@ export class NewsService {
 
     getCart() {
         return this.cardSbj;
+    }
+
+    addToAllDeleteNews(id) {
+        if (this.allDeleteNews.includes(id)) {
+            this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
+        } else {
+            this.allDeleteNews.push(id);
+        }
+        this.$allDeleteNews.next(this.allDeleteNews);
+    }
+
+    getAllDeleteNews() {
+        return this.$allDeleteNews;
     }
 
     getAllNewsByCondition() {

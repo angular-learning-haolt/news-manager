@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { Subscription } from 'rxjs/Subscription';
 import { NewsService } from './../news.service';
 
 @Component({
@@ -18,11 +17,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public selectedDate: '';
     public selectedCategory = '0';
     public page = 1;
+    public action = '';
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        // private subscription: Subscription
         private newsService: NewsService
     ) { }
 
@@ -40,14 +39,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 category: this.selectedCategory
             }
         );
-        // console.log(this.newsQuantity);
-        // console.log({
-        //     page: this.page,
-        //     perPage: 6,
-        //     keywords: this.keywords,
-        //     postStatus: this.status,
-        //     category: this.selectedCategory
-        // });
     }
 
     ngOnInit() {
@@ -62,6 +53,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     this.newsCategoriesID = data.map((cat) => cat.id);
                 }
             );
+        this.newsService.getAllDeleteNews().subscribe(data => console.log(data));
     }
 
     goToPreviousPage() {
@@ -78,7 +70,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        // this.subscription.unsubscribe();
     }
 
     goToLastPage() {
@@ -88,5 +79,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     goToFirstPage() {
         this.page = 1;
     }
-    onBulkAction() { }
+    onBulkActionChange(act) {
+        this.action = act;
+    }
+    
+    onBulkAction() {
+        if(this.action === 'delete') {
+            const ans = confirm('Xóa hết tất cả các News đã chọn nhé ?');
+            console.log(ans);
+        }
+    }
 }

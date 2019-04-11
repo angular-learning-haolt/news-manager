@@ -1,13 +1,9 @@
 <div class="row mt-4">
     <div class="col-md-8">
         <h3 class="mb-4">News List</h3>
-        <!-- <select class="form-control" name="selectedDate"
-            [(ngModel)]="selectedDate"
-        >
-            <option value="">Date</option>
-            <option value="">Select1</option>
-        </select> -->
-        <select class="form-control mr-2" name="action"
+        
+        <select [(ngModel)]="action" (ngModelChange)="onBulkActionChange($event)"
+             class="form-control mr-2" name="action" value="{{ action }}"
         >
             <option value="">Bulk Action</option>
             <option value="delete">Delete</option>

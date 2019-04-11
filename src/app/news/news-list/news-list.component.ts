@@ -27,7 +27,6 @@ export class NewsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.getAllNews();
     this.newsService.getAllNewsCategories()
         .subscribe(
@@ -59,7 +58,6 @@ export class NewsListComponent implements OnInit {
         console.log(data);
         this.news = data.data;
         this.newsQuantity = data.postsQuantity;
-
     });
   }
 
@@ -74,9 +72,15 @@ export class NewsListComponent implements OnInit {
   }
 
   onDeleteItem(id) {
-    this.newsService.deleteNewsByID(id).subscribe((data) => {
-      console.log('Đã xóa: ', data);
-      this.getAllNews();
-    });
+    const ans = confirm('Xóa nhé?');
+    if (ans) {
+      this.newsService.deleteNewsByID(id).subscribe((data) => {
+        console.log('NewsList đã xóa: ', data);
+        this.getAllNews();
+      });
+    }
+  }
+  onCheckItem(id: number) {
+    this.newsService.addToAllDeleteNews(id);
   }
 }
