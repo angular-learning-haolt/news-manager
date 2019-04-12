@@ -70,6 +70,8 @@
                                 >
                                     Delete
                                 </a>
+                                    <!-- (click)="onClickPermanlyDelete(item?.id)" -->
+                                <app-news-form-confirm [openModalConfirmDelete]="openModalConfirmDelete" #modal></app-news-form-confirm>
                             </div>
                         </td>
                         <td>

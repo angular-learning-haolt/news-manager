@@ -130,7 +130,8 @@ export class NewsListComponent implements OnInit {
         });
     }
   }
-  onClickPermanlyDelete() {
-    // this.openModalConfirmDelete = true;
+  onClickPermanlyDelete(id) {
+    this.openModalConfirmDelete = true;
+    // console.log(this.openModalConfirmDelete, id);
   }
 }

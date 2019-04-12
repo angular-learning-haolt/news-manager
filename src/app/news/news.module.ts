@@ -15,9 +15,10 @@ import { MapCategoryPipe } from './map-category.pipe';
 import { MapTagsPipe } from './map-tags.pipe';
 import { MapAuthorPipe } from './map-author.pipe';
 import { PageQuantityPipe } from './page-quantity.pipe';
+import { NewsFormConfirmComponent } from './news-form-confirm/news-form-confirm.component';
 
 @NgModule({
-  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent, MapCategoryPipe, MapTagsPipe, MapAuthorPipe, PageQuantityPipe],
+  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent, MapCategoryPipe, MapTagsPipe, MapAuthorPipe, PageQuantityPipe, NewsFormConfirmComponent],
   imports: [
     CommonModule,
     NewsRoutingModule,
