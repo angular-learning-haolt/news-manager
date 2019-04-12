@@ -14,6 +14,7 @@ export class NewsListComponent implements OnInit {
   public newsCategoriesID: number[];
   public newsQuantity: number;
   public allDeleteNews: number[] = [];
+  public openModalConfirmDelete = false;
   public hasCheckAllItems = false;
 
   public conditionOnSearch: any = {
@@ -23,7 +24,7 @@ export class NewsListComponent implements OnInit {
       postStatus: 'publish',
       category: 0
   };
-
+  public hasPermanlyDelete = false;
   constructor(
     private newsService: NewsService
   ) {}
@@ -128,5 +129,8 @@ export class NewsListComponent implements OnInit {
             console.log(this.allDeleteNews);
         });
     }
+  }
+  onClickPermanlyDelete() {
+    // this.openModalConfirmDelete = true;
   }
 }

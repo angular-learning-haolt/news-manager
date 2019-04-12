@@ -34,3 +34,6 @@ tr:hover .option {
 .option span {
     color: #e1e1e1;
 }
+tr th:first-child, tr td:first-child {
+    width: 40%;
+}

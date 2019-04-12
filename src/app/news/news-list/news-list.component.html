@@ -33,19 +33,40 @@
                                 >
                                 <label class="custom-control-label" for="{{ item?.id }}">{{ item?.title.rendered }}</label>
                             </div>
-                            <div class="option">
+                            <div class="option"
+                                *ngIf="conditionOnSearch.postStatus !== 'trash'"
+                            >
                                 <a class="text-info"
                                     [routerLink]="item?.slug + '-' + item?.id"
                                 >
-                                    View
+                                    Edit
                                 </a>
                                 <span>|</span>
                                 <a class="text-warning mx-2">
-                                    Edit
+                                    Quick Edit
                                 </a>
                                 <span>|</span>
                                 <a class="text-danger"
                                     (click)="onDeleteItem(item?.id)"
+                                >
+                                    Trash
+                                </a>
+                                <a class="text-info"
+                                    [routerLink]="item?.slug + '-' + item?.id"
+                                >
+                                    Preview
+                                </a>
+                            </div>
+                            <div class="option"
+                                *ngIf="conditionOnSearch.postStatus == 'trash'"
+                            >
+                                <a class="text-info"
+                                >
+                                    Restore
+                                </a>
+                                <span>|</span>
+                                <a class="text-danger"
+                                    (click)="onClickPermanlyDelete(item?.id)"
                                 >
                                     Delete
                                 </a>
