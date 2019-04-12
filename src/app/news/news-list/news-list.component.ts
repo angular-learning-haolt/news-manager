@@ -13,6 +13,8 @@ export class NewsListComponent implements OnInit {
   public newsCategories: any = [];
   public newsCategoriesID: number[];
   public newsQuantity: number;
+  public allDeleteNews: number[] = [];
+  public hasCheckAllItems = false;
 
   public conditionOnSearch: any = {
       page: 1,
@@ -32,6 +34,7 @@ export class NewsListComponent implements OnInit {
         .subscribe(
             data => {
               this.newsCategories = data;
+
               console.log('Cates:', data);
               localStorage.setItem('categories', JSON.stringify(data));
             }
@@ -55,8 +58,12 @@ export class NewsListComponent implements OnInit {
         this.conditionOnSearch.postStatus,
         this.conditionOnSearch.category
     ).subscribe((data) => {
-        console.log(data);
         this.news = data.data;
+        console.log('Line 61', this.news);
+        this.news = this.news.map((item)=> {
+          item.hasChecked = false;
+          return item
+        });
         this.newsQuantity = data.postsQuantity;
     });
   }
@@ -71,16 +78,55 @@ export class NewsListComponent implements OnInit {
     this.getAllNews();
   }
 
-  onDeleteItem(id) {
-    const ans = confirm('Xóa nhé?');
-    if (ans) {
-      this.newsService.deleteNewsByID(id).subscribe((data) => {
-        console.log('NewsList đã xóa: ', data);
-        this.getAllNews();
-      });
+  onCheckAllItems() {
+    this.hasCheckAllItems = !this.hasCheckAllItems;
+    this.news = this.news.map((item)=> {
+        item.hasChecked = this.hasCheckAllItems;
+        return item
+    });
+    // this.allDeleteNews.
+    if (this.hasCheckAllItems) {
+        this.news.map((item)=> {
+            this.allDeleteNews.push(item.id);
+        });
+    } else {
+        this.allDeleteNews = [];
+
     }
+    console.log('onCheckAllItems: ' ,this.allDeleteNews);
   }
+
+  onDeleteItem(id) {
+    // const ans = confirm('Xóa nhé?');
+    this.newsService.deleteNewsByID(id).subscribe((data) => {
+      console.log('NewsList đã xóa: ', data);
+      this.getAllNews();
+    });
+  }
+
   onCheckItem(id: number) {
-    this.newsService.addToAllDeleteNews(id);
+    // UI
+    const news = this.news.filter((item) => item.id === id );
+    news[0].hasChecked = (news[0].hasChecked) ? false : true;
+    // LOGIC
+    if (this.allDeleteNews.includes(id)) {
+        this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
+    } else {
+        this.allDeleteNews.push(id);
+    }
+    this.hasCheckAllItems = (this.allDeleteNews.length === 6) ? true : false;
+    console.log('onCheckItem: ', this.allDeleteNews);
+  }
+
+  onGetBulkAction(val) {
+    if (val === 'delete') {
+        this.allDeleteNews.map((id) => {
+            this.onDeleteItem(id);
+            if (this.allDeleteNews.includes(id)) {
+                this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
+            }
+            console.log(this.allDeleteNews);
+        });
+    }
   }
 }

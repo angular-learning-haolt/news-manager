@@ -38,18 +38,18 @@ export class NewsService {
         return this.cardSbj;
     }
 
-    addToAllDeleteNews(id) {
-        if (this.allDeleteNews.includes(id)) {
-            this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
-        } else {
-            this.allDeleteNews.push(id);
-        }
-        this.$allDeleteNews.next(this.allDeleteNews);
-    }
+    // addToAllDeleteNews(id) {
+    //     if (this.allDeleteNews.includes(id)) {
+    //         this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
+    //     } else {
+    //         this.allDeleteNews.push(id);
+    //     }
+    //     this.$allDeleteNews.next(this.allDeleteNews);
+    // }
 
-    getAllDeleteNews() {
-        return this.$allDeleteNews;
-    }
+    // getAllDeleteNews() {
+    //     return this.$allDeleteNews;
+    // }
 
     getAllNewsByCondition() {
         return this.result;
@@ -128,16 +128,6 @@ export class NewsService {
         return this.http.get<any>(
             this.buildUrl('/wp-json/wp/v2/categories')
         )
-        // .pipe(
-        //     map((cate) => {
-        //         cates = [];
-        //         let _cate = {
-        //             id: cate.id,
-        //             name: cate.name
-        //         }
-        //         cates.push(_cate);
-        //     })
-        // )
     }
 
     getAllNewsTags() {
@@ -189,10 +179,7 @@ export class NewsService {
 
     deleteNewsByID(id: number) {
         return this.http.delete<any>(
-            this.buildUrl('wp-json/wp/v2/posts/' + id),
-    //   { params: this.buildParams({
-    //     id
-    //   })}
+            this.buildUrl('wp-json/wp/v2/posts/' + id)
     );
     }
 

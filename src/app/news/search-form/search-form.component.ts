@@ -26,6 +26,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) { }
 
     @Output() conditionOnSearch = new EventEmitter<any>();
+    @Output() bulkAction = new EventEmitter<string>();
     @Input() newsQuantity;
     public pageQuantity;
 
@@ -53,7 +54,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     this.newsCategoriesID = data.map((cat) => cat.id);
                 }
             );
-        this.newsService.getAllDeleteNews().subscribe(data => console.log(data));
+        // this.newsService.getAllDeleteNews().subscribe(data => console.log(data));
     }
 
     goToPreviousPage() {
@@ -79,14 +80,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     goToFirstPage() {
         this.page = 1;
     }
-    onBulkActionChange(act) {
-        this.action = act;
-    }
     
-    onBulkAction() {
-        if(this.action === 'delete') {
-            const ans = confirm('Xóa hết tất cả các News đã chọn nhé ?');
-            console.log(ans);
-        }
+    onBulkActionChange(act) {
+        this.bulkAction.emit(this.action);
     }
 }

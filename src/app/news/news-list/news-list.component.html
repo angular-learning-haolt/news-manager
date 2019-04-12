@@ -1,5 +1,7 @@
 <app-search-form [newsQuantity]="newsQuantity"
-    (conditionOnSearch)="onGetconditionOnSearch($event)"></app-search-form>
+    (conditionOnSearch)="onGetconditionOnSearch($event)"
+    (bulkAction)="onGetBulkAction($event)"
+></app-search-form>
 <div class="row">
     <div class="col-12">
         <table class="table table-striped table-hover">
@@ -7,7 +9,10 @@
                 <tr>
                     <th>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="allNews">
+                            <input type="checkbox" class="custom-control-input" id="allNews"
+                                (change)="onCheckAllItems()"
+                                [checked] = "hasCheckAllItems"
+                            >
                             <label class="custom-control-label" for="allNews">Title</label>
                         </div>
                     </th>
@@ -23,7 +28,8 @@
                         <td class="cell-title pb-4">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="{{ item?.id }}"
-                                    (click)="onCheckItem( item?.id)"
+                                    (change)="onCheckItem( item?.id)"
+                                    [checked] = "item?.hasChecked"
                                 >
                                 <label class="custom-control-label" for="{{ item?.id }}">{{ item?.title.rendered }}</label>
                             </div>

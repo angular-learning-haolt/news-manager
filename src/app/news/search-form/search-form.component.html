@@ -2,7 +2,7 @@
     <div class="col-md-8">
         <h3 class="mb-4">News List</h3>
         
-        <select [(ngModel)]="action" (ngModelChange)="onBulkActionChange($event)"
+        <select [(ngModel)]="action"
              class="form-control mr-2" name="action" value="{{ action }}"
         >
             <option value="">Bulk Action</option>
@@ -10,7 +10,7 @@
             <option value="edit">Edit</option>
         </select>
         <button class="btn btn-outline-secondary" type="button"
-            (click)="onBulkAction()"
+            (click)="onBulkActionChange($event)"
         >
             Apply
         </button>
