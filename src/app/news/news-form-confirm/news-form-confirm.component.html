@@ -1,6 +1,5 @@
 <!-- Button trigger modal -->
 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#exampleModal">Open Modal</button>
-  v 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -12,11 +11,19 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <p>Bạn có chắc muốn xóa
+            <b>{{ deletePermanlyNews.title.rendered }}</b>
+            được tạo ngày
+            <i>{{ deletePermanlyNews.date }}</i>
+            ?</p>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-light" data-dismiss="modal"
+          >Cancel</button>
+          <button type="button" class="btn btn-dark"
+            (click)="onPermanlyDelete()"
+          >Delete</button>
         </div>
       </div>
     </div>

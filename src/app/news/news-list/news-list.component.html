@@ -51,6 +51,7 @@
                                 >
                                     Trash
                                 </a>
+                                <span>|</span>
                                 <a class="text-info"
                                     [routerLink]="item?.slug + '-' + item?.id"
                                 >
@@ -66,12 +67,10 @@
                                 </a>
                                 <span>|</span>
                                 <a class="text-danger"
-                                    (click)="onClickPermanlyDelete(item?.id)"
+                                    (click)="onClickPermanlyDelete(item, item?.id)"
                                 >
                                     Delete
                                 </a>
-                                    <!-- (click)="onClickPermanlyDelete(item?.id)" -->
-                                <app-news-form-confirm [openModalConfirmDelete]="openModalConfirmDelete" #modal></app-news-form-confirm>
                             </div>
                         </td>
                         <td>
@@ -94,3 +93,6 @@
         </table>
     </div>
 </div>
+<app-news-form-confirm (hasPermalyDelete)="onPermanlyDelete($event)"
+    [deletePermanlyNews]="deletePermanlyNews"
+></app-news-form-confirm>

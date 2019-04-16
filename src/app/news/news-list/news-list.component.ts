@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from './../news.service';
 import { News } from './../news.class';
+import { NewsFormConfirmComponent } from './../news-form-confirm/news-form-confirm.component';
 
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss']
 })
+
 export class NewsListComponent implements OnInit {
 
+  @ViewChild( NewsFormConfirmComponent ) newsFormConfirmComponent: NewsFormConfirmComponent
   public news: any;
   public newsCategories: any = [];
   public newsCategoriesID: number[];
@@ -25,6 +28,8 @@ export class NewsListComponent implements OnInit {
       category: 0
   };
   public hasPermanlyDelete = false;
+  public deletePermanlyID: number;
+  public deletePermanlyNews: any;
   constructor(
     private newsService: NewsService
   ) {}
@@ -83,18 +88,17 @@ export class NewsListComponent implements OnInit {
     this.hasCheckAllItems = !this.hasCheckAllItems;
     this.news = this.news.map((item)=> {
         item.hasChecked = this.hasCheckAllItems;
-        return item
+        return item;
     });
-    // this.allDeleteNews.
     if (this.hasCheckAllItems) {
-        this.news.map((item)=> {
+        this.news.map((item) => {
             this.allDeleteNews.push(item.id);
         });
     } else {
         this.allDeleteNews = [];
 
     }
-    console.log('onCheckAllItems: ' ,this.allDeleteNews);
+    console.log('onCheckAllItems: ', this.allDeleteNews);
   }
 
   onDeleteItem(id) {
@@ -130,8 +134,19 @@ export class NewsListComponent implements OnInit {
         });
     }
   }
-  onClickPermanlyDelete(id) {
-    this.openModalConfirmDelete = true;
-    // console.log(this.openModalConfirmDelete, id);
+  onClickPermanlyDelete(item, id) {
+    this.deletePermanlyNews = item;
+    this.newsFormConfirmComponent.showModal();
+    this.deletePermanlyID = id;
+  }
+
+  onPermanlyDelete(val) {
+    this.newsService.deletePermanlyNewsByID(this.deletePermanlyID).subscribe(
+        (data) => {
+            console.log(data);
+            this.getAllNews();
+        }
+    );
+    this.newsFormConfirmComponent.closeModal();
   }
 }

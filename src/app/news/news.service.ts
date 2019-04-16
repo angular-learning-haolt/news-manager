@@ -183,6 +183,16 @@ export class NewsService {
     );
     }
 
+    deletePermanlyNewsByID(id: number) {
+        console.log('Tôi xoá ' + id + 'đây!');
+        return this.http.delete<any>(
+            this.buildUrl('wp-json/wp/v2/posts/' + id),
+            { params: this.buildParams({
+                force: true
+            })}
+        );
+    }
+
     handleError(err) {
     if (err.error instanceof Error) {
         console.log(`Client side Error: ${ err.error.message }`);
