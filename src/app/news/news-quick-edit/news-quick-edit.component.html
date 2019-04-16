@@ -1,0 +1,45 @@
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush p-2">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control"
+                value="{{ title }}"
+                [(ngModel)]="title"
+            >
+            <label for="exampleFormControlInput1">Slug</label>
+            <input type="text" class="form-control"
+                value="{{ slug }}"
+                [(ngModel)]="slug"
+            >
+        </div>
+        <select class="form-control mx-2"
+            [value]='cateID'
+            [(ngModel)]="cateID"
+        >
+            <option value="0">
+                All
+            </option>
+            <option value="15">
+                15
+            </option>
+            <option
+                *ngFor="let newsCategory of newsCategories"
+                value="{{ newsCategory?.id }}"
+            >
+                {{ newsCategory?.name }}
+            </option>
+        </select>
+        <div class="btns">
+            <button class="btn btn-light"
+                (click)="onCancel()"
+            >
+                Cancel
+            </button>
+            <button class="btn btn-dark"
+                (click)="onUpdateNews()"
+            >
+                Update
+            </button>
+        </div>
+    </ul>
+</div>

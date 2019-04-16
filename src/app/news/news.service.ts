@@ -38,19 +38,6 @@ export class NewsService {
         return this.cardSbj;
     }
 
-    // addToAllDeleteNews(id) {
-    //     if (this.allDeleteNews.includes(id)) {
-    //         this.allDeleteNews = this.allDeleteNews.filter(newsId => newsId !== id );
-    //     } else {
-    //         this.allDeleteNews.push(id);
-    //     }
-    //     this.$allDeleteNews.next(this.allDeleteNews);
-    // }
-
-    // getAllDeleteNews() {
-    //     return this.$allDeleteNews;
-    // }
-
     getAllNewsByCondition() {
         return this.result;
     }
@@ -62,16 +49,6 @@ export class NewsService {
         status: string = 'publish',
         categories: null | number
     ) {
-
-        // let params = new HttpParams({});
-        // params = params.append('page', '2');
-        // params = params.append('perPage', '6');
-        // params = params.append('s', s);
-        // params = params.append('status', status);
-        // if (categories !== 0) {
-        //     params = params.append('categories', '2');
-        // }
-        // console.log('Log in Service: ', params);
         if (categories !== 0) {
             return this.http.get<any>(
                 this.buildUrl('wp-json/wp/v2/posts'),

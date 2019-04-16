@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Bạn có chắc muốn xóa
+          <p *ngIf="deletePermanlyNews">Bạn có chắc muốn xóa
             <b>{{ deletePermanlyNews.title.rendered }}</b>
             được tạo ngày
             <i>{{ deletePermanlyNews.date }}</i>

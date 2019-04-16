@@ -30,6 +30,11 @@ export class NewsListComponent implements OnInit {
   public hasPermanlyDelete = false;
   public deletePermanlyID: number;
   public deletePermanlyNews: any;
+
+
+  public isQuickEditStatus = false;
+  public editItem: any;
+
   constructor(
     private newsService: NewsService
   ) {}
@@ -68,7 +73,8 @@ export class NewsListComponent implements OnInit {
         console.log('Line 61', this.news);
         this.news = this.news.map((item)=> {
           item.hasChecked = false;
-          return item
+          item.isQuickEditStatus = false;
+          return item;
         });
         this.newsQuantity = data.postsQuantity;
     });
@@ -148,5 +154,10 @@ export class NewsListComponent implements OnInit {
         }
     );
     this.newsFormConfirmComponent.closeModal();
+  }
+
+  onQuickEdit(id) {
+    const editNews = this.news.filter((item) => item.id === id );
+    editNews[0].isQuickEditStatus = !editNews[0].isQuickEditStatus;
   }
 }
