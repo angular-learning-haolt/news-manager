@@ -160,4 +160,10 @@ export class NewsListComponent implements OnInit {
     const editNews = this.news.filter((item) => item.id === id );
     editNews[0].isQuickEditStatus = !editNews[0].isQuickEditStatus;
   }
+
+  onEditSuccess(val) {
+    if (val) {
+      this.getAllNews();
+    }
+  }
 }

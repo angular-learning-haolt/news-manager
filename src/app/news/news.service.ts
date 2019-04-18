@@ -9,33 +9,30 @@ import { News } from './news.class';
 })
 export class NewsService {
 
-    // public apiUrl = 'https://demo.crefox.com/news-sun-training/';
     public apiUrl = 'http://localhost:8080/news/';
     public errStatus: string;
     public categories;
-    public cardSbj: BehaviorSubject<any[] | null >;
+    public $cardSbj: BehaviorSubject<any[] | null >;
     public result: BehaviorSubject<any | null >;
     public newsQuantity: BehaviorSubject<number>;
     public conditions: BehaviorSubject<any[]>;
-    public $allDeleteNews: BehaviorSubject<any>;
     public allDeleteNews: number[] = [];
 
     constructor(
         private http: HttpClient
     ) {
-        this.cardSbj = new BehaviorSubject(null);
+        this.$cardSbj = new BehaviorSubject(null);
         this.result = new BehaviorSubject(null);
         this.newsQuantity = new BehaviorSubject(1);
         this.conditions = new BehaviorSubject([]);
-        this.$allDeleteNews = new BehaviorSubject([]);
     }
 
     addCard() {
-        this.cardSbj.next(['So difficult :(( ']);
+        this.$cardSbj.next(['So difficult :(( ']);
     }
 
     getCart() {
-        return this.cardSbj;
+        return this.$cardSbj;
     }
 
     getAllNewsByCondition() {
@@ -152,6 +149,19 @@ export class NewsService {
     //     id
     //   })}
     );
+    }
+
+    updateNews(id: number, title: string, slug: string, cate: number) {
+        return this.http.post<any>(
+            this.buildUrl('wp-json/wp/v2/posts/' + id),
+            null,
+            { params: this.buildParams({
+                            title,
+                            slug,
+                            categories: cate
+                        })
+            }
+        );
     }
 
     deleteNewsByID(id: number) {

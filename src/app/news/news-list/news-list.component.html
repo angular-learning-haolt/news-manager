@@ -19,7 +19,6 @@
                     <th>Author</th>
                     <th>Category</th>
                     <th>Tags</th>
-                    <th>Comment</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -75,7 +74,9 @@
                             </a>
                         </div>
                         <div class="col-4" *ngIf="item.isQuickEditStatus">
-                            <app-news-quick-edit [editItem]="item"></app-news-quick-edit>
+                            <app-news-quick-edit [editItem]="item"
+                                (editSuccess)="onEditSuccess($event)"
+                            ></app-news-quick-edit>
                         </div>
                     </td>
                     <td>
@@ -86,9 +87,6 @@
                     </td>
                     <td>
                         {{ item?.tags | mapTags }}
-                    </td>
-                    <td>
-                        vfb
                     </td>
                     <td>
                         {{ item?.date }}

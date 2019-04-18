@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewsService } from './../news.service';
 
 @Component({
@@ -13,11 +13,13 @@ export class NewsQuickEditComponent implements OnInit {
   public slug = '';
   public cateID = 0;
   public newsCategories: any = [];
-  // public newsCategoriesID: number[];
+
+  @Output() editSuccess = new EventEmitter<boolean>();
 
   constructor(
     private newsService: NewsService
   ) { }
+
   ngOnInit() {
     this.title = this.editItem.title.rendered;
     this.slug = this.editItem.slug;
@@ -26,14 +28,19 @@ export class NewsQuickEditComponent implements OnInit {
       .subscribe(
           data => {
               this.newsCategories = data;
-              // this.newsCategoriesID = data.map((cat) => cat.id);
           }
       );
     console.log(this.editItem);
   }
+
   onUpdateNews() {
-    console.log('Sửa ra như này hả: ', this.title, this.slug, this.cateID);
+    this.newsService.updateNews(this.editItem.id, this.title, this.slug, this.cateID)
+        .subscribe((data) => {
+            this.editSuccess.emit(true);
+            this.editItem.isQuickEditStatus = false;
+        });
   }
+
   onCancel() {
     this.editItem.isQuickEditStatus = false;
   }
