@@ -92,6 +92,26 @@ export class NewsService {
         }
     }
 
+    getAllSlugs() {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/posts'),
+            {
+                params: this.buildParams({
+                    status: 'publish'
+                }),
+            observe: 'response'
+            }
+        ).pipe(
+            map((response) => {
+                const data = response.body;
+                return data
+            }),
+            // map((news) => {
+            //     return news.slug
+            // })
+        );
+    }
+
     getAllNewsStatus() {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/statuses')

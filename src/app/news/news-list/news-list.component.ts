@@ -34,18 +34,40 @@ export class NewsListComponent implements OnInit {
 
   public isQuickEditStatus = false;
   public editItem: any;
-
+  public allSlugs: string[] = [];
   constructor(
     private newsService: NewsService
   ) {}
 
   ngOnInit() {
     this.getAllNews();
+    // this.newsService.getAllNews(
+    //     this.conditionOnSearch.page,
+    //     this.conditionOnSearch.perPage,
+    //     this.conditionOnSearch.keywords,
+    //     this.conditionOnSearch.postStatus,
+    //     this.conditionOnSearch.category
+    // ).subscribe((data) => {
+    //     this.news = data.data;
+    //     this.news = this.news.map((item)=> {
+    //       item.hasChecked = false;
+    //       item.isQuickEditStatus = false;
+    //       return item;
+    //     });
+    //     this.newsQuantity = data.postsQuantity;
+    //     this.allSlugs = this.news.map((news) => {
+    //         return news.slug
+    //     });
+    //     console.log('Tất cả slugs:', this.allSlugs);
+    //     localStorage.setItem('slugs', JSON.stringify(this.allSlugs));
+    // });
+    this.newsService.getAllSlugs().subscribe((data) => {
+       console.log('Tất cả slugs:', data);
+    });
     this.newsService.getAllNewsCategories()
         .subscribe(
             data => {
               this.newsCategories = data;
-
               console.log('Cates:', data);
               localStorage.setItem('categories', JSON.stringify(data));
             }

@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="">Add News</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <input type="text" class="form-control my-2" placeholder="Title"
+                [(ngModel)]="title"
+                (keyup)="onTitleChange()"
+            />
+            <app-ngx-editor
+                [placeholder]="'Enter text here...'"
+                [spellcheck]="true"
+                [(ngModel)]="htmlContent">
+            </app-ngx-editor>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="options text-right">
+            <button class="btn btn-light mr-2"
+                [disabled]="isValidTitle"
+            >Save Draft</button>
+            <button class="btn btn-success"
+                (click)="onPublish()"
+                [disabled]="isValidTitle"
+            >
+                Publish
+            </button>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#document">Document</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#block">Block</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="document" class="container tab-pane active"><br>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                Status & Visibility
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle float-right mb-2" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ status | titlecase }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <fieldset data-role="controlgroup" class="p-3">
+                                            <input type="radio" name="gender" id="public" value="public"
+                                                [(ngModel)]="status"
+                                            >
+                                            <label for="public">Public</label>
+                                            <br/>
+                                            <input type="radio" name="gender" id="schedule" value="schedule"
+                                                [(ngModel)]="status"
+                                            >
+                                            <label for="schedule">Schedule<i>(DatePicker bellow)</i></label>
+                                            <br/>
+                                            <input type="radio" name="gender" id="private" value="private"
+                                                [(ngModel)]="status"
+                                            >
+                                            <label for="private">Private</label>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                Categories
+                            </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <label>
+                                    Search Categories
+                                    <input type="text" class="form-control my-2"/>
+                                </label>
+                                <div class="control checkbox"
+                                    *ngFor="let newsCategory of newsCategories"
+                                >
+                                    <label class="control-label" for="{{ newsCategory.id }}">
+                                        <input type="checkbox" class="control-input" id="{{ newsCategory.id }}"
+                                            [checked]="newsCategory.hasSelected"
+                                            (change)="onSelectCate(newsCategory)"
+                                        >
+                                        {{ newsCategory.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                Tags
+                            </a>
+                            </div>
+                            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <input type="text" class="form-control my-2" name="tags"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                                Feature Image
+                            </a>
+                            </div>
+                            <div id="collapseFour" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <button class="btn btn-light">Upload img</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+                                Excerpt
+                            </a>
+                            </div>
+                            <div id="collapseFive" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <textarea name="excerpt" cols="30" rows="10"
+                                    [(ngModel)]="excerpt"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="block" class="container tab-pane fade"><br>
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewsComponent } from './news/news.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import { NewsDetailComponent } from './news-detail/news-detail.component';
+import { NewsAddComponent } from './news-add/news-add.component';
 
 const newsRoutes: Routes = [
   {
@@ -13,6 +14,10 @@ const newsRoutes: Routes = [
       {
         path: '',
         component: NewsListComponent
+      },
+      {
+        path: 'add',
+        component: NewsAddComponent
       },
       {
         path: ':slug-id',

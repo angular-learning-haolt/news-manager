@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewsRoutingModule } from './news-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
 import { TokenInterceptor } from './token-interceptor';
 import { FormsModule } from '@angular/forms';
 
@@ -17,14 +18,30 @@ import { MapAuthorPipe } from './map-author.pipe';
 import { PageQuantityPipe } from './page-quantity.pipe';
 import { NewsFormConfirmComponent } from './news-form-confirm/news-form-confirm.component';
 import { NewsQuickEditComponent } from './news-quick-edit/news-quick-edit.component';
+import { NewsAddComponent } from './news-add/news-add.component';
 
 @NgModule({
-  declarations: [NewsComponent, NewsListComponent, ExcerptPipe, NewsDetailComponent, SearchFormComponent, NewsItemComponent, MapCategoryPipe, MapTagsPipe, MapAuthorPipe, PageQuantityPipe, NewsFormConfirmComponent, NewsQuickEditComponent],
+  declarations: [
+      NewsComponent,
+      NewsListComponent,
+      ExcerptPipe,
+      NewsDetailComponent,
+      SearchFormComponent,
+      NewsItemComponent,
+      MapCategoryPipe,
+      MapTagsPipe,
+      MapAuthorPipe,
+      PageQuantityPipe,
+      NewsFormConfirmComponent,
+      NewsQuickEditComponent,
+      NewsAddComponent
+  ],
   imports: [
     CommonModule,
     NewsRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxEditorModule
   ],
   providers: [
     {
