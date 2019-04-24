@@ -1,0 +1,13 @@
+<ul>
+    <div class="space py-5"></div>
+    <li class="nav-item"
+        routerLinkActive="active"
+        *ngFor="let nav of navs"
+    >
+        <a class="nav-link"
+            [routerLink]="nav.route"
+        >
+            {{ nav.title | titlecase }}
+        </a>
+    </li>
+</ul>
