@@ -32,6 +32,20 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'tag',
+    loadChildren: './tag/tag.module#TagModule',
+    canActivate: [
+      LoginGuard
+    ]
+  },
+  {
+    path: 'category',
+    loadChildren: './category/category.module#CategoryModule',
+    canActivate: [
+      LoginGuard
+    ]
+  },
+  {
     path: '**',
     component: NotFoundComponent
   },

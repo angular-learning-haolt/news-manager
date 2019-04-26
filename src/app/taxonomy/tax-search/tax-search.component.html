@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control"
+                [(ngModel)]="keywords"
+            >
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"
+                    (click)="onSearch()"
+                >
+                    Search News
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="pagination float-right">
+            <label class="newsQuantity">
+                {{ taxQuantity }} items
+            </label>
+            <li>
+                <a class="btn btn-custom btn-light"
+                    (click)="goFirstPage()"
+                >
+                    <i class="fas fa-less-than"></i>
+                    <i class="fas fa-less-than"></i>
+                </a>
+                <a class="btn btn-custom btn-light"
+                    (click)="goPrevPage()"
+                >
+                    <i class="fas fa-less-than"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <label class="mx-1">
+                    <input type="number" class="form-control"
+                        [(ngModel)]="page"
+                        [defaultValue]="1"
+                    >
+                    of {{ pageQuantity }}
+                </label>
+            </li>
+            <li>
+                <a class="btn btn-custom btn-light"
+                    (click)="goNextPage()"
+                >
+                    <i class="fas fa-greater-than"></i>
+                </a>
+                <a class="btn btn-custom btn-light"
+                    (click)="goLastPage()"
+                >
+                    <i class="fas fa-greater-than"></i>
+                    <i class="fas fa-greater-than"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -187,7 +187,7 @@ export class NewsService {
     deleteNewsByID(id: number) {
         return this.http.delete<any>(
             this.buildUrl('wp-json/wp/v2/posts/' + id)
-    );
+        );
     }
 
     deletePermanlyNewsByID(id: number) {

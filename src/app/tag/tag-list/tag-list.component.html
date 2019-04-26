@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-4 col-tag-add">
+        <app-tag-add></app-tag-add>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <app-tax-action
+                    (actionEmit)="onDoAction($event)"
+                ></app-tax-action>
+            </div>
+            <div class="col-md-8">
+                <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"></app-tax-search>
+            </div>
+        </div>
+        <app-tax-list
+            [allTaxes]="allTags"
+            (checkedTaxesEmit)="onCheckTags($event)"
+            (idDeleteEmit)="onDeleteTagById($event)"
+        ></app-tax-list>
+    </div>
+</div>

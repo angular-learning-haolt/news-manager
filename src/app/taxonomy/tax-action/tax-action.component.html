@@ -1,0 +1,18 @@
+<div class="input-group mb-3">
+    <select
+        class="form-control mr-2" name="action" value="{{ action }}"
+        (change)="getAction()"
+        [(ngModel)]="action"
+    >
+        <option value="">Bulk Action</option>
+        <option value="delete">Delete</option>
+        <option value="edit">Edit</option>
+    </select>
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button"
+            (click)="onDoAction()"
+        >
+            Apply
+        </button>
+    </div>
+</div>
