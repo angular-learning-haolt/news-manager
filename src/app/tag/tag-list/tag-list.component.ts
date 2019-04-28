@@ -17,21 +17,25 @@ export class TagListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.tagService.getAllTags().subscribe(
-          (data) => {
-            this.allTags = data.data;
-            this.allTags = this.allTags.map((tag)=> {
-              tag.hasChecked = false;
-              return tag;
-            });
-            this.tagQuantity = data.tagQuantity;
-            this.pageQuantity = Math.ceil(this.tagQuantity / 6);
-            console.log('Alltags: ' , this.allTags);
-          },
-          (err) => {
-              this.tagService.handleError(err);
-          }
-      );
+      this.getAllTags('', 1);  
+  }
+  
+  getAllTags(s, page) {
+    this.tagService.getAllTags(s, page).subscribe(
+        (data) => {
+          this.allTags = data.data;
+          this.allTags = this.allTags.map((tag)=> {
+            tag.hasChecked = false;
+            return tag;
+          });
+          this.tagQuantity = data.tagQuantity;
+          this.pageQuantity = Math.ceil(this.tagQuantity / 6);
+          console.log('Alltags: ' , this.allTags);
+        },
+        (err) => {
+            this.tagService.handleError(err);
+        }
+    );
   }
 
   onCheckTags(t) {
@@ -41,7 +45,7 @@ export class TagListComponent implements OnInit {
   onDoAction(act) {
     this.action = act;
     // if (this.action === 'delete' && this.checkedTaxes.length > 0) {
-      console.log('Do action!!!');
+    console.log('Do action!!!');
     //   this.checkedTaxes.map((id) => {
     //     this.deleteTag(id);
     //   })
@@ -54,5 +58,10 @@ export class TagListComponent implements OnInit {
     //   console.log('Tags đã xóa: ' + id);
     // });
     console.log('Xóa ' + e);
+  }
+
+  onSearch(searchData) {
+    console.log(searchData);
+    this.getAllTags(searchData.s, searchData.page)
   }
 }

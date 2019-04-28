@@ -3,6 +3,7 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control"
                 [(ngModel)]="keywords"
+                (keyup)="onSearch()"
             >
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button"

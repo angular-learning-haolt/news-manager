@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-tax-search',
@@ -9,8 +9,8 @@ export class TaxSearchComponent implements OnInit {
     @Input() taxQuantity;
     @Input() pageQuantity;
     public page = 1;
-    public action = '';
     public keywords = '';
+    @Output() searchDataEmit = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -34,6 +34,9 @@ export class TaxSearchComponent implements OnInit {
   }
 
   onSearch() {
-    console.log(this.keywords, this.page);
+    this.searchDataEmit.emit({
+      s: this.keywords,
+      page: this.page
+    });
   }
 }

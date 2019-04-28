@@ -10,7 +10,9 @@
                 ></app-tax-action>
             </div>
             <div class="col-md-8">
-                <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"></app-tax-search>
+                <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"
+                    (searchDataEmit)="onSearch($event)"
+                ></app-tax-search>
             </div>
         </div>
         <app-tax-list
