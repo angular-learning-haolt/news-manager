@@ -44,12 +44,14 @@ export class TagListComponent implements OnInit {
 
   onDoAction(act) {
     this.action = act;
-    // if (this.action === 'delete' && this.checkedTaxes.length > 0) {
-    console.log('Do action!!!');
-    //   this.checkedTaxes.map((id) => {
-    //     this.deleteTag(id);
-    //   })
-    // }
+    if (this.action === 'delete' && this.checkedTaxes.length > 0) {
+        console.log('Do action!!!');
+        this.checkedTaxes.map((id) => {
+        this.tagService.deleteTagById(id).subscribe(data => {
+            this.getAllTags('', 1);
+        });
+      });
+    }
   }
 
   onDeleteTagById(e) {
