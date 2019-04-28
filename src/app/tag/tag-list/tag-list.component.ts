@@ -17,9 +17,9 @@ export class TagListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.getAllTags('', 1);  
+      this.getAllTags('', 1);
   }
-  
+
   getAllTags(s, page) {
     this.tagService.getAllTags(s, page).subscribe(
         (data) => {
@@ -53,11 +53,12 @@ export class TagListComponent implements OnInit {
   }
 
   onDeleteTagById(e) {
-    let id = e;
-    // this.tagService.deleteTagById(id).subscribe(data => {
+    const id = e;
+    this.tagService.deleteTagById(id).subscribe(data => {
     //   console.log('Tags đã xóa: ' + id);
-    // });
-    console.log('Xóa ' + e);
+      this.getAllTags('', 1);
+    });
+    // console.log('Xóa ' + e);
   }
 
   onSearch(searchData) {

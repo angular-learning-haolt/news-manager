@@ -54,7 +54,13 @@ export class TagService {
 
     deleteTagById(id: number) {
         return this.http.delete<any>(
-            this.buildUrl('wp-json/wp/v2/tags/' + id)
+            this.buildUrl('wp-json/wp/v2/tags/' + id),
+            {
+                params: this.buildParams({
+                    force: true
+                }),
+                observe: 'response'
+            }
         );
     }
 
