@@ -30,7 +30,7 @@ export class TagListComponent implements OnInit {
           });
           this.tagQuantity = data.tagQuantity;
           this.pageQuantity = Math.ceil(this.tagQuantity / 6);
-          console.log('Alltags: ' , this.allTags);
+          // console.log('Alltags: ' , this.allTags);
         },
         (err) => {
             this.tagService.handleError(err);
@@ -61,7 +61,10 @@ export class TagListComponent implements OnInit {
   }
 
   onSearch(searchData) {
-    console.log(searchData);
+    // console.log(searchData);
     this.getAllTags(searchData.s, searchData.page)
+  }
+  onAddSuccess(e) {
+    this.getAllTags('', 1);
   }
 }

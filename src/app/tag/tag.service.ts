@@ -14,35 +14,17 @@ export class TagService {
         private http: HttpClient
     ) { }
 
-    // getAllTags() {
-    //     return this.http.get<any>(
-    //         this.buildUrl('wp-json/wp/v2/tags'),
-    //         // {
-    //         //     params: this.buildParams({
-    //         //         page,
-    //         //         per_page: perPage,
-    //         //         search: s,
-    //         //         status
-    //         //     }),
-    //         //     observe: 'response'
-    //         // }
-    //         {
-    //             observe: 'response'
-    //         }
-    //     )
-    //     .pipe(
-    //         map((response) => {
-    //             const data = response.body;
-    //             const tagQuantity = parseInt(response.headers.get('x-wp-total'), 10);
-    //             // const pageQuantity = parseInt(response.headers.get('x-wp-totalpages'), 10); // X-WP-TotalPages
-    //             return {
-    //                 data,
-    //                 tagQuantity
-    //                 // pageQuantity
-    //             };
-    //         })
-    //     );
-    // }
+    addNewTag(name: string, slug: string) {
+        return this.http.post<any>(
+            this.buildUrl('wp-json/wp/v2/tags'),
+            null,
+            { params: this.buildParams({
+                            name,
+                            slug
+                    })
+            }
+        );
+    }
 
     getAllTags(s: string, page: number = 1) {
         return this.http.get<any>(
@@ -55,13 +37,6 @@ export class TagService {
                 }),
                 observe: 'response'
             }
-            // {
-            //     params: this.buildTagParams(s, page),
-            //     observe: 'response'
-            // }
-            // {
-            //     observe: 'response'
-            // }
         )
         .pipe(
             map((response) => {
@@ -76,15 +51,6 @@ export class TagService {
             })
         );
     }
-
-    // buildTagParams(_s: string, _page: number) {
-    //     let params = new HttpParams().set('per_page', '6');
-    //     let params = new HttpParams().set('page', _page.toString());
-    //     if (_s) {
-    //         params = params.append('search', s);
-    //     }
-    //     return params;
-    // }
 
     deleteTagById(id: number) {
         return this.http.delete<any>(

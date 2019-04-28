@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TagService } from '../tag.service';
 
 @Component({
   selector: 'app-tag-add',
@@ -9,8 +10,10 @@ export class TagAddComponent implements OnInit {
 
   public name: string;
   public slug: string;
-
-  constructor() { }
+  @Output() hasAddSuccessEmit = new EventEmitter();
+  constructor(
+    private tagService: TagService
+  ) { }
 
   ngOnInit() {
   }
@@ -18,6 +21,12 @@ export class TagAddComponent implements OnInit {
   onAddTag() {
       if (this.checkSlug()) {
         console.log(this.name, this.slug);
+        this.tagService.addNewTag(this.name, this.slug).subscribe(
+          data => {
+            console.log(data);
+            this.hasAddSuccessEmit.emit(true);
+          }
+        );
       }
   }
 
