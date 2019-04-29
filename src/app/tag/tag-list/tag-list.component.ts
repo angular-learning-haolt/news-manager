@@ -26,6 +26,7 @@ export class TagListComponent implements OnInit {
           this.allTags = data.data;
           this.allTags = this.allTags.map((tag)=> {
             tag.hasChecked = false;
+            tag.isQuickEditStatus = false;
             return tag;
           });
           this.tagQuantity = data.tagQuantity;
@@ -69,5 +70,15 @@ export class TagListComponent implements OnInit {
   }
   onAddSuccess(e) {
     this.getAllTags('', 1);
+  }
+  onSubmitEditedTag(editedTag) {
+      console.log('Send req update: ');
+      console.log(editedTag);
+      this.tagService.updateTag(editedTag.id, editedTag.name, editedTag.slug).subscribe(
+          data => {
+            //   console.log(data);
+            this.getAllTags('', 1);
+          }
+      );
   }
 }

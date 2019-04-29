@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from '../news.service';
+import { NewsAddFileComponent } from '../news-add-file/news-add-file.component';
 
 @Component({
   selector: 'app-news-add',
@@ -18,6 +19,7 @@ export class NewsAddComponent implements OnInit {
   public isValidTitle = true;
 
   public newsCategories: any = [];
+  @ViewChild( NewsAddFileComponent ) newsAddFileComponent: NewsAddFileComponent;
   constructor(
     private newsService: NewsService
   ) { }
@@ -54,5 +56,8 @@ export class NewsAddComponent implements OnInit {
 
   onSelectCate(cate) {
     cate.hasSelected = true;
+  }
+  onOpenUploadFileModal() {
+      this.newsAddFileComponent.showModal();
   }
 }

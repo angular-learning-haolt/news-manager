@@ -11,6 +11,7 @@ export class TaxListComponent implements OnInit {
   public checkedTaxes: number[] = [];
   public hasCheckAllTaxes =  false;
   @Output() idDeleteEmit = new EventEmitter<any>();
+  @Output() editedTaxEmit = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
@@ -56,5 +57,11 @@ export class TaxListComponent implements OnInit {
 
   onDeleteTax(id: number) {
     this.idDeleteEmit.emit(id);
+  }
+  onQuickEdit(tax) {
+    tax.isQuickEditStatus = !tax.isQuickEditStatus;
+  }
+  onSubmitEditedTax(editedTax) {
+    this.editedTaxEmit.emit(editedTax);
   }
 }

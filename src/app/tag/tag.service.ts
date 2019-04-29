@@ -26,6 +26,18 @@ export class TagService {
         );
     }
 
+    updateTag(id: number, name: string, slug: string) {
+        return this.http.post<any>(
+            this.buildUrl('wp-json/wp/v2/tags/' + id),
+            null,
+            { params: this.buildParams({
+                            name,
+                            slug
+                    })
+            }
+        );
+    }
+
     getAllTags(s: string, page: number = 1) {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/tags'),

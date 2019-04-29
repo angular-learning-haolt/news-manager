@@ -1,0 +1,51 @@
+<!-- Button trigger modal -->
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#exampleModal">Open Modal</button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#uploadFile">Upload File</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#myGallery">My Gallery</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="uploadFile" class="container tab-pane active"><br>
+                    <div id="accordion">
+                        <div class="form-group">
+                            <label for="loadYourImg">Upload your images</label>
+                            <input type="file" (change)="onFileSelected($event)" placeholder="Upload file" accept=".png, .jpg">
+                            <button type="button" class="btn btn-dark"
+                                (click)="onUpload()"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="myGallery" class="container tab-pane fade"><br>
+                    <h3>Menu 1</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal"
+          >Cancel</button>
+          <button type="button" class="btn btn-dark"
+          >Add</button>
+        </div>
+      </div>
+    </div>
+  </div>

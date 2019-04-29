@@ -11,7 +11,7 @@ import { NewsFormConfirmComponent } from './../news-form-confirm/news-form-confi
 
 export class NewsListComponent implements OnInit {
 
-  @ViewChild( NewsFormConfirmComponent ) newsFormConfirmComponent: NewsFormConfirmComponent
+  @ViewChild( NewsFormConfirmComponent ) newsFormConfirmComponent: NewsFormConfirmComponent;
   public news: any;
   public newsCategories: any = [];
   public newsCategoriesID: number[];

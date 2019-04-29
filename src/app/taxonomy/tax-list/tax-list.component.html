@@ -33,6 +33,7 @@
                     </a>
                     <span>|</span>
                     <a class="text-warning mx-2"
+                        (click)="onQuickEdit(tax)"
                     >
                         Quick Edit
                     </a>
@@ -50,27 +51,16 @@
                         View
                     </a>
                 </div>
-                <div class="option"
-
-                >
-                <!-- *ngIf="conditionOnSearch.postStatus == 'trash'" -->
-                    <!-- <a class="text-info"
-                    >
-                        Restore
-                    </a>
-                    <span>|</span>
-                    <a class="text-danger"
-
-                    > -->
-                    <!-- (click)="onClickPermanlyDelete(item, item?.id)" -->
-                        <!-- Delete
-                    </a> -->
-                </div>
-                <!-- <div class="col-4">
-                    <app-news-quick-edit [editItem]="item"
+                <div class="col-4" *ngIf="tax?.isQuickEditStatus">
+                    QUICKEDIT
+                    <app-tax-quick-edit
+                        [editTax]="tax"
+                        (editedTaxEmit)="onSubmitEditedTax($event)"
+                    ></app-tax-quick-edit>
+                    <!-- <app-news-quick-edit [editItem]="item"
                         (editSuccess)="onEditSuccess($event)"
-                    ></app-news-quick-edit>
-                </div> -->
+                    ></app-news-quick-edit> -->
+                </div>
             </td>
             <td>
                 {{ tax.description ? tax.description : 'No description' }}

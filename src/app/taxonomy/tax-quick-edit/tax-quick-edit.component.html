@@ -1,0 +1,28 @@
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush p-2">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" class="form-control"
+                value="{{ name }}"
+                [(ngModel)]="name"
+            >
+            <label for="exampleFormControlInput1">Slug</label>
+            <input type="text" class="form-control"
+                value="{{ slug }}"
+                [(ngModel)]="slug"
+            >
+        </div>
+        <div class="btns">
+            <button class="btn btn-light"
+                (click)="onCancel()"
+            >
+                Cancel
+            </button>
+            <button class="btn btn-dark"
+                (click)="onUpdateTax()"
+            >
+                Update
+            </button>
+        </div>
+    </ul>
+</div>

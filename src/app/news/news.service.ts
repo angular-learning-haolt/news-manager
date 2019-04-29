@@ -104,7 +104,7 @@ export class NewsService {
         ).pipe(
             map((response) => {
                 const data = response.body;
-                return data
+                return data;
             }),
             // map((news) => {
             //     return news.slug

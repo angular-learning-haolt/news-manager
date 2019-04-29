@@ -121,7 +121,9 @@
                             </div>
                             <div id="collapseFour" class="collapse" data-parent="#accordion">
                             <div class="card-body">
-                                <button class="btn btn-light">Upload img</button>
+                                <button class="btn btn-light"
+                                    (click)="onOpenUploadFileModal()"
+                                >Upload img</button>
                             </div>
                         </div>
                     </div>
@@ -148,4 +150,4 @@
         </div>
     </div>
 </div>
-
+<app-news-add-file></app-news-add-file>

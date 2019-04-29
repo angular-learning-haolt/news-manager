@@ -19,6 +19,7 @@ import { PageQuantityPipe } from './page-quantity.pipe';
 import { NewsFormConfirmComponent } from './news-form-confirm/news-form-confirm.component';
 import { NewsQuickEditComponent } from './news-quick-edit/news-quick-edit.component';
 import { NewsAddComponent } from './news-add/news-add.component';
+import { NewsAddFileComponent } from './news-add-file/news-add-file.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NewsAddComponent } from './news-add/news-add.component';
       PageQuantityPipe,
       NewsFormConfirmComponent,
       NewsQuickEditComponent,
-      NewsAddComponent
+      NewsAddComponent,
+      NewsAddFileComponent
   ],
   imports: [
     CommonModule,
