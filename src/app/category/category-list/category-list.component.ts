@@ -81,4 +81,9 @@ export class CategoryListComponent implements OnInit {
     onSearch(searchData) {
         this.getAllCats(searchData.s, searchData.page);
     }
+    onAddSuccess(e) {
+        if (e) {
+            this.getAllCats('', 1);
+        }
+    }
 }

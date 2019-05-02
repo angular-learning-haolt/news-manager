@@ -1,3 +1,34 @@
-<p>
-  category-add works!
-</p>
+<form>
+    <h3>Add new tag</h3>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control"
+            [(ngModel)]="name"
+            (keyup)="onChangeName()"
+            [ngModelOptions]="{standalone: true}"
+        >
+    </div>
+    <div class="form-group">
+        <label>Slug</label>
+        <input type="text" class="form-control"
+            [(ngModel)]="slug"
+            [ngModelOptions]="{standalone: true}"
+        >
+    </div>
+    <div class="form-group">
+        <label>Parent Category</label>
+        <select
+          class="form-control mr-2" name="action" value=""
+          [(ngModel)]="category"
+          [ngModelOptions]="{standalone: true}"
+        >
+          <option value="">Bulk Action</option>
+          <option value="1">Delete</option>
+          <option value="2">Edit</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="reset"
+        [disabled]="hasDisableBtn"
+        (click)="onAddCat()"
+    >Add new tag</button>
+</form>

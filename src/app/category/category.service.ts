@@ -14,17 +14,24 @@ export class CategoryService {
         private http: HttpClient
     ) { }
 
-    // addNewTag(name: string, slug: string) {
-    //     return this.http.post<any>(
-    //         this.buildUrl('wp-json/wp/v2/tags'),
-    //         null,
-    //         { params: this.buildParams({
-    //                         name,
-    //                         slug
-    //                 })
-    //         }
-    //     );
-    // }
+    addNewCat(name: string, slug: string, parent: string) {
+            let params = new HttpParams();
+            params = params.append('name', name);
+            if (slug) {
+                params = params.append('slug', slug);
+            }
+            if (parent) {
+                params = params.append('parent', parent);
+            }
+            return this.http.post<any>(
+                this.buildUrl('wp-json/wp/v2/categories'),
+                null,
+                {
+                    params: params
+                }
+            );
+        
+    }
 
     updateCat(id: number, name: string, slug: string) {
         return this.http.post<any>(
