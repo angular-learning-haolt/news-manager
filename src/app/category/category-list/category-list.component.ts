@@ -44,17 +44,19 @@ export class CategoryListComponent implements OnInit {
     onDoAction(act) {
         this.action = act;
         if (this.action === 'delete') {
-            // if (this.action === 'delete' && this.checkedTaxes.length > 0) {
-            console.log('Do action!!!' + this.action);
-            // this.checkedTaxes.map((id) => {
-            //     this.tagService.deleteTagById(id).subscribe(data => {
-            //         this.getAllTags('', 1);
-            //     });
-            // });
+            if (this.action === 'delete' && this.checkedTaxes.length > 0) {
+                console.log('Do action!!!' + this.action);
+                // console.log(this.checkedTaxes);
+                this.checkedTaxes.map((id) => {
+                    this.categoryService.deleteCatById(id).subscribe(data => {
+                        this.getAllCats('', 1);
+                    });
+                });
+            }
         }
     }
-    onCheckTags(e) {
-
+    onCheckCats(e) {
+        this.checkedTaxes = e;
     }
     onDeleteTagById(id: number) {
         this.categoryService.deleteCatById(id).subscribe(

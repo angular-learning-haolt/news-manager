@@ -11,7 +11,6 @@
                 <app-tax-action
                     (actionEmit)="onDoAction($event)"
                 ></app-tax-action>
-                Tax Action
             </div>
             <div class="col-md-8">
                 <!-- <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"
@@ -20,12 +19,11 @@
                 <app-tax-search [taxQuantity]="catQuantity" [pageQuantity]="pageQuantity"
                     (searchDataEmit)="onSearch($event)"
                 ></app-tax-search>
-                tax-search
             </div>
         </div>
         <app-tax-list
             [allTaxes]="allCats"
-            (checkedTaxesEmit)="onCheckTags($event)"
+            (checkedTaxesEmit)="onCheckCats($event)"
             (idDeleteEmit)="onDeleteTagById($event)"
             (editedTaxEmit)="onSubmitEditedCat($event)"
             [editedTax]="editedTax"
