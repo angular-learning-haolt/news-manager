@@ -171,7 +171,7 @@ export class NewsListComponent implements OnInit {
   onPermanlyDelete(val) {
     this.newsService.deletePermanlyNewsByID(this.deletePermanlyID).subscribe(
         (data) => {
-            console.log(data);
+            // console.log(data);
             this.getAllNews();
         }
     );
@@ -183,9 +183,12 @@ export class NewsListComponent implements OnInit {
     editNews[0].isQuickEditStatus = !editNews[0].isQuickEditStatus;
   }
 
-  onEditSuccess(val) {
-    if (val) {
-      this.getAllNews();
+  onEditSuccess(editItem) {
+    if (editItem) {
+        const updatedNews = this.news.filter((item) => item.id === editItem.id)[0];
+        updatedNews.title.rendered = editItem.title;
+        updatedNews.slug = editItem.slug;
+        updatedNews.categories.push(editItem.catID);
     }
   }
 }

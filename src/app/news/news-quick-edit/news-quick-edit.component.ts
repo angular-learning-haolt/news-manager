@@ -14,7 +14,7 @@ export class NewsQuickEditComponent implements OnInit {
   public cateID = 0;
   public newsCategories: any = [];
 
-  @Output() editSuccess = new EventEmitter<boolean>();
+  @Output() editItemEmit = new EventEmitter();
 
   constructor(
     private newsService: NewsService
@@ -34,10 +34,14 @@ export class NewsQuickEditComponent implements OnInit {
   }
 
   onUpdateNews() {
+    this.editItemEmit.emit({
+        id: this.editItem.id,
+        title: this.title,
+        catID: this.cateID
+    });
+    this.editItem.isQuickEditStatus = false;
     this.newsService.updateNews(this.editItem.id, this.title, this.slug, this.cateID)
         .subscribe((data) => {
-            this.editSuccess.emit(true);
-            this.editItem.isQuickEditStatus = false;
         });
   }
 

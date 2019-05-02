@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-4" *ngIf="item.isQuickEditStatus">
                             <app-news-quick-edit [editItem]="item"
-                                (editSuccess)="onEditSuccess($event)"
+                                (editItemEmit)="onEditSuccess($event)"
                             ></app-news-quick-edit>
                         </div>
                     </td>

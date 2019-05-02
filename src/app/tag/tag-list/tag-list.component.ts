@@ -12,6 +12,7 @@ export class TagListComponent implements OnInit {
   public pageQuantity: number;
   public checkedTaxes: number[] = [];
   public action: string;
+  public editedTax: any;
   constructor(
       private tagService: TagService
   ) { }
@@ -74,10 +75,11 @@ export class TagListComponent implements OnInit {
   onSubmitEditedTag(editedTag) {
       console.log('Send req update: ');
       console.log(editedTag);
+      this.editedTax = editedTag;
       this.tagService.updateTag(editedTag.id, editedTag.name, editedTag.slug).subscribe(
           data => {
             //   console.log(data);
-            this.getAllTags('', 1);
+            // this.getAllTags('', 1);
           }
       );
   }

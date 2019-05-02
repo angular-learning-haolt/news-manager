@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-md-4 col-tag-add">
-        <app-tag-add
+        <!-- <app-tag-add
             (hasAddSuccessEmit)="onAddSuccess($event)"
-        ></app-tag-add>
+        ></app-tag-add> -->
+        tag-add
     </div>
     <div class="col-md-8">
         <div class="row">
@@ -10,19 +11,25 @@
                 <app-tax-action
                     (actionEmit)="onDoAction($event)"
                 ></app-tax-action>
+                Tax Action
             </div>
             <div class="col-md-8">
-                <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"
+                <!-- <app-tax-search [taxQuantity]="tagQuantity" [pageQuantity]="pageQuantity"
+                    (searchDataEmit)="onSearch($event)"
+                ></app-tax-search> -->
+                <app-tax-search [taxQuantity]="catQuantity" [pageQuantity]="pageQuantity"
                     (searchDataEmit)="onSearch($event)"
                 ></app-tax-search>
+                tax-search
             </div>
         </div>
         <app-tax-list
-            [allTaxes]="allTags"
+            [allTaxes]="allCats"
             (checkedTaxesEmit)="onCheckTags($event)"
             (idDeleteEmit)="onDeleteTagById($event)"
-            (editedTaxEmit)="onSubmitEditedTag($event)"
+            (editedTaxEmit)="onSubmitEditedCat($event)"
             [editedTax]="editedTax"
         ></app-tax-list>
+        TaxList
     </div>
 </div>

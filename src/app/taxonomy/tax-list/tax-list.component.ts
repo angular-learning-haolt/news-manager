@@ -1,12 +1,13 @@
-import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-tax-list',
   templateUrl: './tax-list.component.html',
   styleUrls: ['./tax-list.component.scss']
 })
-export class TaxListComponent implements OnInit {
+export class TaxListComponent implements OnInit, OnChanges {
   @Input() allTaxes;
+  @Input() editedTax;
   @Output() checkedTaxesEmit = new EventEmitter<any>();
   public checkedTaxes: number[] = [];
   public hasCheckAllTaxes =  false;
@@ -17,8 +18,18 @@ export class TaxListComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges() {
+    if (this.editedTax) {
+        console.log('Edited Tax', this.editedTax);
+        const updatedTax = this.allTaxes.filter((tax) => tax.id === this.editedTax.id)[0];
+        updatedTax.name = this.editedTax.name;
+        updatedTax.slug = this.editedTax.slug;
+        console.log('Updated Tax', updatedTax);
+        console.log('All Tax', this.allTaxes);
+    }
+  }
   onCheckTax(id: number) {
-    let checkedTax = this.getTagById(id);
+    const checkedTax = this.getTagById(id);
     checkedTax.hasChecked = !checkedTax.hasChecked;
     if (this.checkedTaxes.includes(id)) {
         this.checkedTaxes = this.checkedTaxes.filter(taxId => taxId !== id );
@@ -27,6 +38,8 @@ export class TaxListComponent implements OnInit {
     }
     if (this.checkedTaxes.length === 6) {
       this.hasCheckAllTaxes = true;
+    } else if (this.checkedTaxes.length <= 6) {
+        this.hasCheckAllTaxes = false;
     }
     // console.log(this.checkedTaxes);
     this.checkedTaxesEmit.emit(this.checkedTaxes);
@@ -40,7 +53,7 @@ export class TaxListComponent implements OnInit {
     this.hasCheckAllTaxes = !this.hasCheckAllTaxes;
     this.allTaxes.map((tax) => {
       tax.hasChecked = this.hasCheckAllTaxes;
-      return tax
+      return tax;
     });
     if (this.hasCheckAllTaxes) {
         this.allTaxes.map((item) => {
