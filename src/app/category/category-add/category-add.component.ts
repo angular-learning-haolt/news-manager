@@ -8,7 +8,8 @@ import { CategoryService } from './../category.service';
 })
 export class CategoryAddComponent implements OnInit {
   public name: string;
-  public parent;
+  public parent = '';
+  public allCats;
   public slug;
   public hasDisableBtn = true;
   @Output() hasAddSuccessEmit = new EventEmitter<boolean>();
@@ -17,6 +18,12 @@ export class CategoryAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.categoryService.getAllCats('', 1).subscribe(
+      data => {
+        this.allCats = data.data;
+      },
+      err => console.log(err)
+    );
   }
   onAddCat() {
     console.log(this.name, this.slug, this.parent);

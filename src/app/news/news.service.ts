@@ -39,6 +39,27 @@ export class NewsService {
         return this.result;
     }
 
+    addNewNews(title: string, content: string, status: string, excerpt: string) { // CHƯA CÓ `categories`
+        let params = new HttpParams();
+        params = params.append('title', title);
+        if (content) {
+            params = params.append('content', content);
+        }
+        if (status) {
+            params = params.append('status', status);
+        }
+        if (excerpt) {
+            params = params.append('excerpt', excerpt);
+        }
+        return this.http.post<any>(
+            this.buildUrl('wp-json/wp/v2/posts'),
+            null,
+            {
+                params
+            }
+        );
+    }
+
     getAllNews(
         page: number = 1,
         perPage: number = 6,

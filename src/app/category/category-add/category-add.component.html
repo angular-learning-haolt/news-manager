@@ -18,13 +18,12 @@
     <div class="form-group">
         <label>Parent Category</label>
         <select
-          class="form-control mr-2" name="action" value=""
-          [(ngModel)]="category"
+          class="form-control mr-2" name="parent" value="{{ parent }}"
+          [(ngModel)]="parent"
           [ngModelOptions]="{standalone: true}"
         >
-          <option value="">Bulk Action</option>
-          <option value="1">Delete</option>
-          <option value="2">Edit</option>
+          <option value="">None</option>
+          <option *ngFor="let allCat of allCats" value="{{ allCat.id }}">{{ allCat.name }}</option>
         </select>
     </div>
     <button class="btn btn-primary" type="reset"

@@ -27,10 +27,10 @@ export class CategoryService {
                 this.buildUrl('wp-json/wp/v2/categories'),
                 null,
                 {
-                    params: params
+                    params
                 }
             );
-        
+
     }
 
     updateCat(id: number, name: string, slug: string) {
