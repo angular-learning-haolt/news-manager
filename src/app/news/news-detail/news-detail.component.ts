@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from './../news.service';
+import { MediaService } from './../media.service';
 import { News } from '../news.class';
 
 @Component({
@@ -11,10 +12,12 @@ import { News } from '../news.class';
 export class NewsDetailComponent implements OnInit {
 
   public curentNews: News;
+  public curentNewsImgUrl: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private mediaService: MediaService
   ) { }
 
   ngOnInit() {
@@ -24,8 +27,19 @@ export class NewsDetailComponent implements OnInit {
     const curentID =  this.getIDOnURL();
     this.newsService.getNewsByID(curentID).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.curentNews = data;
+        let curentNewsImgID = data.featured_media;
+        if (curentNewsImgID) {
+          this.mediaService.getMediaByID(curentNewsImgID).subscribe(
+            data => {
+              this.curentNewsImgUrl = data.source_url;
+            },
+            error => {
+              this.newsService.handleError(error);
+            }
+          );
+        }
       },
       error => {
         this.newsService.handleError(error);

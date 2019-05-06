@@ -1,0 +1,13 @@
+img {
+    max-width: 100%;
+}
+.gallery__item {
+    max-width: 100px;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+    padding: 5px
+}
+.gallery__item.selected {
+    border: 2px solid #333;
+}

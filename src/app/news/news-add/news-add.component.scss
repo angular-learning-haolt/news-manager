@@ -9,3 +9,22 @@ a {
 .box {
     height: 55px;
 }
+small {
+    display: block;
+    background: #e1e1e1;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+span.delImg {
+    position: absolute;
+    top: -10px;
+    right: -2px;
+    color: #fff;
+    background: #333;
+    padding: 0px 8px 3px;
+    border-radius: 10px;
+    cursor: pointer;
+}

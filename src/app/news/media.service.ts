@@ -23,6 +23,18 @@ export class MediaService {
         );
     }
 
+    getAllMedia() {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/media/')
+        );
+    }
+
+    getMediaByID(id: number) {
+        return this.http.get<any>(
+            this.buildUrl('wp-json/wp/v2/media/' + id)
+        );
+    }
+
     handleError(err) {
         if (err.error instanceof Error) {
             console.log(`Client side Error: ${ err.error.message }`);

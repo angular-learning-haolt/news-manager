@@ -39,7 +39,7 @@ export class NewsService {
         return this.result;
     }
 
-    addNewNews(title: string, content: string, status: string, excerpt: string) { // CHƯA CÓ `categories`
+    addNewNews(title: string, content: string, status: string, excerpt: string, selectedFileId) { // CHƯA CÓ `categories`
         let params = new HttpParams();
         params = params.append('title', title);
         if (content) {
@@ -50,6 +50,9 @@ export class NewsService {
         }
         if (excerpt) {
             params = params.append('excerpt', excerpt);
+        }
+        if (selectedFileId) {
+            params = params.append('featured_media', selectedFileId);
         }
         return this.http.post<any>(
             this.buildUrl('wp-json/wp/v2/posts'),

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { NewsService } from '../news.service';
 import { NewsAddFileComponent } from '../news-add-file/news-add-file.component';
 import { Router } from '@angular/router';
@@ -20,7 +20,9 @@ export class NewsAddComponent implements OnInit {
   public status = 'publish';
   public isValidTitle = true;
   public hasAddNewsSuccessAlert = false;
-
+  public selectedFile;
+  public selectedFileName: string;
+  
   public newsCategories: any = [];
   @ViewChild( NewsAddFileComponent ) newsAddFileComponent: NewsAddFileComponent;
 
@@ -44,12 +46,15 @@ export class NewsAddComponent implements OnInit {
           }
       );
   }
+
   private resetData() {
     this.htmlContent = '';
     this.title = '';
     this.cates = [];
     this.excerpt = '';
-    this.imgUrl;
+    this.selectedFile = null;
+    this.selectedFileName = '';
+    // this.selectedFileId;
     this.tags = [];
     this.status = 'publish';
     this.isValidTitle = true;
@@ -65,16 +70,67 @@ export class NewsAddComponent implements OnInit {
                 .map((cat) => cat.id );
     console.log('Cates: ', this.cates);
     //   console.log(this.tags);
-    this.newsService.addNewNews(this.title, this.htmlContent, this.status, this.excerpt).subscribe(
-        data => {
-            console.log(data);
-        },
-        err => {
-            console.log(err);
-        }
-    );
+    if (this.selectedFile) {
+      this.newsService.addNewNews(this.title, this.htmlContent, this.status, this.excerpt, this.selectedFile['id']).subscribe(
+          data => {
+              console.log(data);
+          },
+          err => {
+              console.log(err);
+          }
+      );
+    } else {
+      this.newsService.addNewNews(this.title, this.htmlContent, this.status, this.excerpt, undefined).subscribe(
+          data => {
+              console.log(data);
+          },
+          err => {
+              console.log(err);
+          }
+      );
+    }
     this.resetData();
     // this.router.navigate(['news']);
+    this.hasAddNewsSuccessAlert = true;
+    setTimeout(
+        () => {
+            this.hasAddNewsSuccessAlert = false;
+        },
+        2000
+    );
+  }
+
+  onSaveDraft() {
+    this.status = 'draft';
+    console.log('Title: ', this.title);
+    console.log('Content: ', this.htmlContent);
+    console.log('Status: ', this.status);
+    console.log('Excerpt: ', this.excerpt);
+    this.cates = this.newsCategories
+                .filter((cate) => cate.hasSelected === true )
+                .map((cat) => cat.id );
+    console.log('Cates: ', this.cates);
+    //   console.log(this.tags);
+    if (this.selectedFile) {
+      this.newsService.addNewNews(this.title, this.htmlContent, this.status, this.excerpt, this.selectedFile['id']).subscribe(
+          data => {
+              console.log(data);
+          },
+          err => {
+              console.log(err);
+          }
+      );
+    } else {
+      this.newsService.addNewNews(this.title, this.htmlContent, this.status, this.excerpt, undefined).subscribe(
+          data => {
+              console.log(data);
+          },
+          err => {
+              console.log(err);
+          }
+      );
+    }
+    // this.resetData();
     this.hasAddNewsSuccessAlert = true;
     setTimeout(
         () => {
@@ -94,5 +150,15 @@ export class NewsAddComponent implements OnInit {
   }
   onOpenUploadFileModal() {
       this.newsAddFileComponent.showModal();
+  }
+  onSelectFile(selectedFile) {
+    this.selectedFile = selectedFile;
+    // this.selectedFileId = this.selectedFile.id;
+    let selectedFileNameURL = selectedFile.source_url;
+    this.selectedFileName = selectedFileNameURL.split('/')[selectedFileNameURL.split('/').length - 1];
+  }
+  onDelImg() {
+    this.selectedFile = null;
+    this.selectedFileName = '';
   }
 }
