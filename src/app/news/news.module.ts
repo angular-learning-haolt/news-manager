@@ -20,6 +20,8 @@ import { NewsFormConfirmComponent } from './news-form-confirm/news-form-confirm.
 import { NewsQuickEditComponent } from './news-quick-edit/news-quick-edit.component';
 import { NewsAddComponent } from './news-add/news-add.component';
 import { NewsAddFileComponent } from './news-add-file/news-add-file.component';
+import {CanDeactivateGuard} from './can-deactivate/can-deactivate.guard';
+import { NewsTestComponent } from './news-test/news-test.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { NewsAddFileComponent } from './news-add-file/news-add-file.component';
       NewsFormConfirmComponent,
       NewsQuickEditComponent,
       NewsAddComponent,
-      NewsAddFileComponent
+      NewsAddFileComponent,
+      NewsTestComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import { NewsAddFileComponent } from './news-add-file/news-add-file.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    CanDeactivateGuard
   ]
 })
 export class NewsModule { }

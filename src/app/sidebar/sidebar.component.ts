@@ -26,6 +26,10 @@ export class SidebarComponent implements OnInit {
           route: 'news'
           },
           {
+            title: 'Subscribe',
+            route: 'news/subscribe'
+          },
+          {
           title: 'Categories',
           route: 'category'
           },

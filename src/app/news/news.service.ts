@@ -151,6 +151,12 @@ export class NewsService {
         )
     }
 
+    getAllNewsAuthors() {
+        return this.http.get<any>(
+            this.buildUrl('/wp-json/wp/v2/users')
+        )
+    }
+
     getCategoryByID(id: number) {
         return this.http.get<any>(
             this.buildUrl('wp-json/wp/v2/categories/' + id)

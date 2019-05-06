@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { TagService } from '../tag.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class TagAddComponent implements OnInit {
   @Output() hasAddSuccessEmit = new EventEmitter();
   constructor(
     private tagService: TagService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }

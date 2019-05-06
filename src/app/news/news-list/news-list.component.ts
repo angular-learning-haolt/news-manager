@@ -13,6 +13,7 @@ export class NewsListComponent implements OnInit {
 
   @ViewChild( NewsFormConfirmComponent ) newsFormConfirmComponent: NewsFormConfirmComponent;
   public news: any;
+  public authors: any;
   public newsCategories: any = [];
   public newsCategoriesID: number[];
   public newsQuantity: number;
@@ -62,7 +63,7 @@ export class NewsListComponent implements OnInit {
     //     localStorage.setItem('slugs', JSON.stringify(this.allSlugs));
     // });
     this.newsService.getAllSlugs().subscribe((data) => {
-       console.log('Tất cả slugs:', data);
+      //  console.log('Tất cả slugs:', data);
     });
     this.newsService.getAllNewsCategories()
         .subscribe(
@@ -78,6 +79,14 @@ export class NewsListComponent implements OnInit {
               this.newsCategories = data;
               console.log('Tags:', data);
               localStorage.setItem('tags', JSON.stringify(data));
+            }
+        );
+    this.newsService.getAllNewsAuthors()
+        .subscribe(
+            data => {
+              this.authors = data;
+              console.log('Authors:', data);
+              localStorage.setItem('authors', JSON.stringify(data));
             }
         );
 

@@ -1,0 +1,17 @@
+<!-- <form #form="ngForm" (ngSubmit)="submit()">
+  <label>name</label>
+  <input [(ngModel)]="name" name="name"/>
+  <button type="submit">Submit</button>
+</form> -->
+<h3>Follow us</h3>
+<div class="form-wrap">
+  <form #form="ngForm" (ngSubmit)="submit()">
+    <h5>Subscribe us to get the newest !</h5>
+    <div class="input-group mb-3">
+        <input [(ngModel)]="name" name="name" type="text" class="form-control"/>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary btn-dark" type="submit">Subscribe</button>
+        </div>
+    </div>
+  </form>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from '../news.service';
 import { NewsAddFileComponent } from '../news-add-file/news-add-file.component';
 import { Router } from '@angular/router';
+// import { FormCanDeactivateCustom } from '../form-can-deactivate-custom/form-can-deactivate-custom';
 
 @Component({
   selector: 'app-news-add',
@@ -22,10 +23,13 @@ export class NewsAddComponent implements OnInit {
 
   public newsCategories: any = [];
   @ViewChild( NewsAddFileComponent ) newsAddFileComponent: NewsAddFileComponent;
+
   constructor(
     private newsService: NewsService
     // private router: Router
-  ) { }
+  ) {
+    // super();
+  }
 
   ngOnInit() {
     this.newsService.getAllNewsCategories()

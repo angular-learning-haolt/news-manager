@@ -2,11 +2,13 @@
     <div class="space py-5"></div>
     <li class="nav-item"
         routerLinkActive="active"
-        *ngFor="let nav of navs"
+        *ngFor="let nav of navs; let i = index"
     >
         <a class="nav-link"
             [routerLink]="nav.route"
+            routerLinkActive="active"
         >
+            <i *ngIf="i !== 1" class="fas fa-angle-right"></i>
             {{ nav.title | titlecase }}
         </a>
     </li>

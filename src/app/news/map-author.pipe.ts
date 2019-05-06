@@ -4,9 +4,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'mapAuthor'
 })
 export class MapAuthorPipe implements PipeTransform {
-
-  transform(value: any, args?: any): any {
-    return null;
+  transform(id: number) {
+    const authors = JSON.parse(localStorage.getItem('authors'));
+    const author = authors.filter(
+        au => au.id === id
+    )[0];
+    return author.name;
   }
 
 }
