@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { TokenInterceptor } from './news/token-interceptor';
 import { SidebarComponent } from './sidebar/sidebar.component';
+
 @NgModule({
   declarations: [
     AppComponent,

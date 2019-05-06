@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
 import { TagService } from '../tag.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class TagAddComponent implements OnInit {
 
   public name: string;
   public slug: string;
+  public hasDisableBtn = true;
   @Output() hasAddSuccessEmit = new EventEmitter();
   constructor(
     private tagService: TagService
@@ -17,6 +18,10 @@ export class TagAddComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onChangeName() {
+    this.hasDisableBtn = this.name ? false : true;
   }
 
   onAddTag() {
